@@ -8,13 +8,13 @@
 }
 
 // ::-webkit-scrollbar {
-//     width: 0 $important;
+//     width: 0 !important;
 //     background-color: transparent;
 // }
 
  // scss-lint:disable all
 body {
-  background-color: $white $important;
+  background-color: #fff !important;
   -ms-content-zooming: none;
   -ms-tap-highlight-color: rgba(0, 0, 0, 0);
   -ms-tap-highlight-color: transparent;
@@ -26,7 +26,7 @@ body {
 
 html,
 body {
-  color: $body-text-color;
+  color: #555;
   font-size: 100%;
 }
 
@@ -83,40 +83,4 @@ table tr td {
 
 .row .col {
   padding: 0;
-}
-
-// collection custome styling //
-
-.collection {
-  border: 0;
-  margin: 0;
-  overflow: visible $important;
-
-  .collection-item {
-    @extend .listpad;
-  }
-}
-
-.disable-body-loader {
-  overflow: hidden $important;
-  pointer-events: none $important;
-
-  .disable-content-loader {
-    opacity: 0;
-    pointer-events: none $important;
-  }
-
-  .modal-footer {
-    pointer-events: all $important;
-  }
-}
-
-.loader {
-  .spinner-green,
-  .spinner-green-only {
-    // border-color: #00acc1 $important;
-  }
-  .circle-clipper .circle {
-    border-width: 6px;
-  }
 }
