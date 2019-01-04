@@ -1,0 +1,56 @@
+//infratab logo fonts
+@font-face {
+  font-family: 'infratab';
+  src: url('../fonts/infratab/infratab.eot');
+  src: url('../fonts/infratab/infratab.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/infratab/infratab.woff') format('woff'),
+       url('../fonts/infratab/infratab.ttf') format('truetype'),
+       url('../fonts/infratab/infratab.svg#infratab') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-infratab::before {
+  content: '\004E';
+}
+
+// LED pattern icons //
+.icon-r {
+  color: $dark-red;
+
+  &::before {
+    content: '\e905';
+  }
+}
+
+.icon-rr {
+  color: $dark-red;
+
+  &::before {
+    content: '\e925';
+  }
+}
+
+.icon-rrr {
+  color: $dark-red;
+
+  &::before {
+    content: '\e924';
+  }
+}
+
+.icon-g {
+  color: $light-green;
+
+  &::before {
+    content: '\e905';
+  }
+}
+
+.icon-gg {
+  color: $light-green;
+
+  &::before {
+    content: '\e925';
+  }
+}

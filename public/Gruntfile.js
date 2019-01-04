@@ -66,9 +66,7 @@ module.exports = function (grunt) {
           style: 'compressed'
         },
         files: {
-          'www/css/windows.css': 'src/sass/windows.scss',
-          'www/css/android.css': 'src/sass/android.scss',
-          'www/css/jellyBean.css': 'src/sass/jellyBean.scss'
+          'www/css/style.css': 'src/sass/style.scss'
         }
       }
     },
@@ -266,6 +264,7 @@ module.exports = function (grunt) {
     // 'scsslint',
     'clean:main',
     'copy:' + environment,
+    'sass:staging',
     'copy:main',
     'handlebars',
     'regex-replace:dev',

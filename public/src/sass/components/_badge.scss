@@ -1,0 +1,28 @@
+.badge-div {
+  margin-bottom: 50px;
+}
+
+.badge {
+  overflow: hidden;
+  text-align: center;
+}
+
+.badge::before,
+.badge::after {
+  border: 1px dotted $black;
+  content: '';
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.badge::before {
+  margin-left: -50%;
+  right: .5em;
+}
+
+.badge::after {
+  left: .5em;
+  margin-right: -50%;
+}

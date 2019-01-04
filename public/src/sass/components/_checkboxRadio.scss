@@ -1,0 +1,99 @@
+// radio //
+.radio {
+  cursor: pointer;
+  display: block;
+  height: 35px;
+  line-height: 35px;
+  margin-bottom: 10px;
+  width: 100%;
+
+  span {
+    color: $gray;
+    display: $display-inline-block;
+    font-size: 20px;
+    line-height: 14px;
+    margin-left: 37px;
+    margin-top: -31px;
+    vertical-align: $top;
+    width: 78%;
+  }
+}
+
+.circle-btn::before {
+  color: $cloud;
+  content: '\e933';
+  display: $display-inline-block;
+  font-family: 'icon';
+  font-size: 30px;
+}
+
+.active .circle-btn::before {
+  color: $cyan;
+  content: '\e91f';
+  font-family: 'icon';
+  font-size: 30px;
+}
+
+// Checkbox //
+.checkbox {
+  cursor: pointer;
+  display: block;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  width: 90%;
+
+  span {
+    color: $gray;
+    display: $display-inline-block;
+    font-size: 20px;
+    line-height: 20px;
+    margin-left: 10px;
+    vertical-align: top;
+    // color: #262626;
+  }
+
+  p {
+    color: $gray;
+    font-size: 18px;
+  }
+}
+
+.square-btn::before {
+  color: $cloud;
+  content: '\e916';
+  font-family: 'icon' $important;
+  font-size: 30px;
+}
+
+.square-btn {
+  display: $display-inline-block;
+  margin-top: -10px;
+}
+
+.active .square-btn::before {
+  color: $cyan;
+  content: '\e917';
+  font-family: 'icon' $important;
+  font-size: 30px;
+}
+
+// .active .square-btn div:before {
+//     display: $display-inline-block;
+//     vertical-align: top;
+//     width: 20px;
+//     height: 20px;
+//     margin-right: 0.3em;
+//     text-align: center;
+//     content: '\e917';
+//     font-family: 'icon';
+//     color: $cyan;
+//     margin-left: 0px;
+//     margin-top: -37.5px;
+//     line-height: 25px;
+//     border-radius: 2px;
+//     font-size: 34px;
+// }
+.active p,
+.active span {
+  color: $cyan;
+}

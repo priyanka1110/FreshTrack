@@ -1,0 +1,39 @@
+$example: (
+  "base":       #f00
+);
+
+$tag-status: (
+  "red": #ed1b24,
+  "yellow": #fbc02d,
+  "orange": #ef7e00,
+  "green": #23b14d,
+);
+
+$colors: (
+  "example": $example,
+  "tag-status": $tag-status
+);
+
+
+// Color Classes
+@each $color-name, $color in $colors {
+  @each $color-type, $color-value in $color {
+    @if $color-type == 'base' {
+      .bg-#{$color-name} {
+        background-color: $color-value $important;
+      }
+
+      .text-#{$color-name} {
+        color: $color-value $important;
+      }
+    } @else if $color-name != 'shades' {
+      .bg-#{$color-name}.#{$color-type} {
+        background-color: $color-value $important;
+      }
+
+      .text-#{$color-name}.#{$color-type} {
+        color: $color-value $important;
+      }
+    }
+  }
+}

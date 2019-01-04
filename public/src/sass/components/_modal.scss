@@ -1,0 +1,55 @@
+.lean-overlay {
+  z-index: 99998 $important;
+}
+
+.modal {
+  @include transform(translate(-50%, -50%) $important);
+  background-color: $white $important;
+  bottom: auto;
+  display: $display-none;
+  left: 50% $important;
+  max-height: calc(100% - 100px) $important;
+  position: fixed;
+  right: auto;
+  top: 50% $important;
+  z-index: 99999 $important;
+
+  .modal-content {
+    padding: $padding2x $padding2x $padding0x;
+
+    h3 {
+      font-size: $fontsize22;
+      font-weight: 500;
+      line-height: inherit;
+
+      // span {
+      //   word-break: break-all;
+      // }
+    }
+
+    p {
+      font-size: $fontsize18;
+      line-height: inherit;
+      padding: $padding1x $padding0x;
+    }
+
+    h5 {
+      font-size: $fontsize20 $important;
+      line-height: inherit;
+    }
+  }
+
+  a {
+    color: $light-blue $important;
+    padding: 0 1rem;
+  }
+
+  .modal-footer {
+    background-color: $white $important;
+    border-radius: 0;
+  }
+}
+
+.input-field label {
+  left: 0;
+}

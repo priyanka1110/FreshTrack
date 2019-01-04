@@ -1,0 +1,122 @@
+::-webkit-scrollbar {
+  background-color: transparent;
+  display: none;
+}
+
+:-webkit-scrollbar-x {
+  overflow-x: hidden;
+}
+
+// ::-webkit-scrollbar {
+//     width: 0 $important;
+//     background-color: transparent;
+// }
+
+ // scss-lint:disable all
+body {
+  background-color: $white $important;
+  -ms-content-zooming: none;
+  -ms-tap-highlight-color: rgba(0, 0, 0, 0);
+  -ms-tap-highlight-color: transparent;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  color: $body-text-color;
+  font-size: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+ul,
+li,
+a,
+button,
+input,
+select,
+textarea,
+table tr td {
+  font-family: roboto-regular;
+  margin: 0;
+  padding: 0;
+}
+
+em {
+  font-style: normal;
+}
+
+ul li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {font-size: 24px;}
+h2 {font-size: 22px;}
+h3 {font-size: 20px;}
+h4 {font-size: 18px;}
+h5 {font-size: 16px;}
+h6 {font-size: 14px;}
+p,
+ul li,
+a,
+button,
+input,
+label,
+select,
+textarea,
+table tr td {
+  font-size: 16px;
+}
+
+.row .col {
+  padding: 0;
+}
+
+// collection custome styling //
+
+.collection {
+  border: 0;
+  margin: 0;
+  overflow: visible $important;
+
+  .collection-item {
+    @extend .listpad;
+  }
+}
+
+.disable-body-loader {
+  overflow: hidden $important;
+  pointer-events: none $important;
+
+  .disable-content-loader {
+    opacity: 0;
+    pointer-events: none $important;
+  }
+
+  .modal-footer {
+    pointer-events: all $important;
+  }
+}
+
+.loader {
+  .spinner-green,
+  .spinner-green-only {
+    // border-color: #00acc1 $important;
+  }
+  .circle-clipper .circle {
+    border-width: 6px;
+  }
+}
