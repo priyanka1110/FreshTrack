@@ -7,7 +7,9 @@ define([
   'underscore',
   'backbone',
   'moment',
+  'materialize',
   'js/models/asset',
+  'js/app',
   'templates/compiledTemplates'
 ], function (
   exports,
@@ -16,7 +18,9 @@ define([
   _,
   Backbone,
   moment,
+  materialize,
   asset,
+  app,
   compiledTemplates
 ) {
   'use strict';
@@ -24,7 +28,7 @@ define([
     initialize: function () {
     },
     render: function () {
-      this.el.innerHTML = compiledTemplates['templates/createAssetEvent.hbs']({
+      this.el.innerHTML = compiledTemplates['templates/assetEventSummary.hbs']({
         assetName: this.model.get('assetName')
       });
     },
@@ -33,8 +37,36 @@ define([
     events: {
       'click #submit': 'submitAsset'
     },
+    formatAssetData: function () {
+      return [{
+        "content": {
+            "data":[
+              {
+                "type": "ambrosus.asset.info",
+                "assetType": "ambrosus.assetTypes.batch",
+                "productInformation": {
+                  "name": this.model.get('assetName'),
+                  "id": this.model.get('productId')
+                },
+                "location": this.model.get('location'),
+                "transferParties": {
+                  "sender": {
+                    "name": this.model.get('sender'),
+                    "org": this.model.get('senderOrganization')
+                  },
+                  "receiver": {
+                    "name": this.model.get('receiver'),
+                    "org": this.model.get('receiverOrganization')
+                  }
+                }
+              }
+            ]
+        }
+      }];
+    },
     submitAsset: function () {
-      this.ambrosus.createAsset(this.model).then(function(response) {
+      var formattedData = this.formatAssetData();
+      app.FTMobile.ambrosus.createAsset(formattedData).then(function(response) {
         // Response if successful
         console.log(response);
       }).catch(function(error) {

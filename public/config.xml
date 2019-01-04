@@ -16,6 +16,17 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="SplashScreenBackgroundColor" value="#795548" />
     <preference name="AndroidLaunchMode" value="singleTask" />
+    <platform name="android">
+        <splash density="port-hdpi" src="www/img/splash/splash-port-hdpi.png" />
+        <splash density="port-ldpi" src="www/img/splash/splash-port-ldpi.png" />
+        <splash density="port-mdpi" src="www/img/splash/splash-port-mdpi.png" />
+        <splash density="port-xhdpi" src="www/img/splash/splash-port-xhdpi.png" />
+        <icon density="ldpi" src="www/img/splash/ldpi.png" />
+        <icon density="mdpi" src="www/img/splash/mdpi.png" />
+        <icon density="hdpi" src="www/img/splash/hdpi.png" />
+        <icon density="xhdpi" src="www/img/splash/xhdpi.png" />
+    </platform>
+    <engine name="android" spec="~6.1.0" />
     <plugin name="cordova-plugin-websql" spec="~0.0.10" />
     <plugin name="phonegap-nfc" spec="~0.6.5" />
     <plugin name="cordova-plugin-device" spec="~1.1.4" />
@@ -30,19 +41,10 @@
     <plugin name="cordova-plugin-camera" spec="~2.3.1" />
     <plugin name="cordova.plugins.diagnostic" spec="~3.2.1" />
     <plugin name="cordova-plugin-dialogs" spec="~1.3.1" />
+    <plugin name="cordova-plugin-crosswalk-webview" spec="~2.3.0" />
+    <plugin name="ftmobile-cominterface" spec="https://github.com/Infratab/FTMobileComInterface" />
     <plugin name="cordova-android-support-gradle-release" spec="^1.2.0">
         <variable name="ANDROID_SUPPORT_VERSION" value="26.+" />
     </plugin>
     <plugin name="cordova-plugin-x-toast" spec="https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin" />
-    <platform name="android">
-        <splash density="port-hdpi" src="www/img/splash/splash-port-hdpi.png" />
-        <splash density="port-ldpi" src="www/img/splash/splash-port-ldpi.png" />
-        <splash density="port-mdpi" src="www/img/splash/splash-port-mdpi.png" />
-        <splash density="port-xhdpi" src="www/img/splash/splash-port-xhdpi.png" />
-        <icon density="ldpi" src="www/img/splash/ldpi.png" />
-        <icon density="mdpi" src="www/img/splash/mdpi.png" />
-        <icon density="hdpi" src="www/img/splash/hdpi.png" />
-        <icon density="xhdpi" src="www/img/splash/xhdpi.png" />
-    </platform>
-    <engine name="android" spec="^6.1.2" />
 </widget>

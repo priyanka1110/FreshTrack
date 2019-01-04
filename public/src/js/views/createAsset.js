@@ -7,6 +7,7 @@ define([
   'underscore',
   'backbone',
   'moment',
+  'materialize',
   'js/app',
   'js/models/asset',
   'templates/compiledTemplates'
@@ -17,6 +18,7 @@ define([
   _,
   Backbone,
   moment,
+  materialize,
   app,
   asset,
   compiledTemplates
@@ -35,8 +37,7 @@ define([
     },
     events: {
       'click #scanCode': 'initializeScanner',
-      'click #needProductData': 'initializeScanner',
-      'click #proceed': 'goToNextPage'
+      'click #goToSummaryPage': 'goToNextPage'
     },
     initializeScanner: function () {
       var self = this;
@@ -52,7 +53,7 @@ define([
       );
     },
     goToNextPage: function () {
-      var needTagData = $('#needProductData').checked;
+      var needTagData = $('#needProductData')[0].checked;
       if (needTagData) {
         app.FTMobile.AppRouter.navigate('getTagData/', { trigger: true });
       } else {

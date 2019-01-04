@@ -11,9 +11,21 @@ define([
 
   var Asset = Backbone.Model.extend({
     defaults: {
-      assetName: ''
+      assetName: '',
+      productId: '',
+      location: '',
+      sender: '',
+      senderOrganization: '',
+      receiver: '',
+      receiverOrganization: ''
     }
   });
 
   exports.assetModel = new Asset();
+
+  var Assets = Backbone.Collection.extend({
+    model: Asset
+  });
+
+  exports.assetsCollection = new Assets();
 });

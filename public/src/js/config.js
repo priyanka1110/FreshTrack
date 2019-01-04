@@ -19,6 +19,7 @@ requirejs.config({
     web3: '../lib/js/web3.min',
     // string manipulation
     string: '../lib/js/string',
+    materialize: '../lib/js/materialize',
 
     // qr code generation
     qrcode: '../lib/js/jquery.qrcode.min'
