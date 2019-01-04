@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
+
+      <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' https://* 'unsafe-inline' 'unsafe-eval'"/> -->
+      <title>Infratab ambrosus</title>
+  </head>
+
+    <body>
+        <div id="mainContainer" class="disable-content-loader">
+            <!-- rootviewTpl -->
+        </div>
+        <div id="modals-demo">
+            <div class="row">
+                <div class="col s12">
+                    <div id="modal" class="modal"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="loader" id="loader">
+        </div>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <!-- build:js:staging,production js/vendor.min.js-->
+
+        <script type="text/javascript" src="js/config-variables.js"></script>
+        <!-- /build -->
+        <script src="lib/js/require-2.3.3.js" data-main="js/config.js"></script>
+
+    </body>
+</html>
