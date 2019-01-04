@@ -9,10 +9,11 @@ define([
              Backbone) {
   'use strict';
 
-  var SettingsModel = Backbone.Model.extend({
+  var Asset = Backbone.Model.extend({
     defaults: {
+      assetName: ''
     }
   });
 
-  exports.settingsModelObj = new SettingsModel();
+  exports.assetModel = new Asset();
 });

@@ -23,34 +23,43 @@ define([
              Web3) {
   'use strict';
 
-  exports.LandingPageView = Marionette.View.extend({
+  exports.HomeView = Marionette.View.extend({
     initialize: function () {
     },
     render: function () {
       this.el.innerHTML = compiledTemplates['templates/homePage.hbs']();
     },
     events: {
-      'click #buttonId': 'showStatus',
-      'click #scanCode': 'initializeScanner'
+      'click #addAsset': 'createAsset',
+      'click #getAsset': 'getAsset'
     },
-    initializeScanner: function () {
-      var self = this;
-      cordova.plugins.barcodeScanner.scan(
-        function (result) {
-          self.scannedData = result.text;
-          console.log(result.text);
-        },
-        function (error) {
-          console.log(error);
-        }
-      );
+    createAsset: function () {
+      app.FTMobile.AppRouter.navigate('createAsset/', { trigger: true });
+    },
+    getAsset: function () {
+      this.ambrosus = new AmbrosusSDK({
+        // Provide env variables
+        secret: '0x77a205c98095ae3218fae2ea197355bdf53a6aa65bb6b5a7a5a7dbf6d3048bfc',
+        address: '0x4267346d85270127740f00A16D19aC836D2d798b',
+        Web3: Web3,
+        apiEndpoint: 'https://gateway-test.ambrosus.com'
+      });
+      this.ambrosus.getAssetById('0x46debb0de0e1ce401da205aa1522df7911488651089e9c5e360802decf1d987d').then(function(response) {
+        // Response if successful
+        console.log(response);
+      }).catch(function(error) {
+        // Error if error
+        console.log(error);
+      });
+
     },
     showStatus: function () {
       this.ambrosus = new AmbrosusSDK({
         // Provide env variables
         secret: '0x77a205c98095ae3218fae2ea197355bdf53a6aa65bb6b5a7a5a7dbf6d3048bfc',
         address: '0x4267346d85270127740f00A16D19aC836D2d798b',
-        Web3: Web3
+        Web3: Web3,
+        apiEndpoint: 'https://gateway-test.ambrosus.com'
       });
       console.log('status here...');
       // app.FTMobile.AppRouter.navigate('summary/checkStatus', { trigger: true });

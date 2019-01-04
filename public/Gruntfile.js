@@ -262,8 +262,8 @@ module.exports = function (grunt) {
 
 
   grunt.registerTask('build', [
-    'eslint',
-    'scsslint',
+    // 'eslint',
+    // 'scsslint',
     'clean:main',
     'copy:' + environment,
     'copy:main',

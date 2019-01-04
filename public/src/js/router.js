@@ -7,28 +7,36 @@ define([
   'underscore',
   'moment',
   './app',
-  './views/landingPageView',
-  'js/views/checkStatusSummary'
+  './views/home',
+  './views/createAsset',
+  './views/summariesAsset',
+  './models/asset'
 ], function (require,
              exports,
              Backbone,
              _,
              moment,
              app,
-             landingPageView,
-             checkStatusSummary) {
+             homeView,
+             createAsset,
+             summariesAsset,
+             asset) {
   'use strict';
 
   exports.Router = Backbone.Router.extend({
     routes: {
-      'landingPage/': 'landingPage'
+      'homePage/': 'homePage',
+      'createAsset/': 'createAsset',
+      'summariesAsset/': 'summariesAsset'
     },
-    landingPage: function () {
-      app.FTMobile.views.landingPageView = new landingPageView.LandingPageView();
-      app.FTMobile.rootView.showChildView('bodyRegion', app.FTMobile.views.landingPageView);
+    homePage: function () {
+      app.FTMobile.rootView.showChildView('bodyRegion', new homeView.HomeView());
     },
-    checkStatusSummary: function () {
-      app.FTMobile.rootView.showChildView('bodyRegion', new checkStatusSummary.CheckStatusSummary({ }));
+    createAsset: function () {
+      app.FTMobile.rootView.showChildView('bodyRegion', new createAsset.CreateAsset({ model: asset.assetModel }));
+    },
+    summariesAsset: function () {
+      app.FTMobile.rootView.showChildView('bodyRegion', new summariesAsset.SummariesAsset({ model: asset.assetModel }));
     }
   });
 });

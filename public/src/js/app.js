@@ -24,6 +24,6 @@ define([
 
   // application start event
   thisModule.FTMobile.on('start', function () {
-    thisModule.FTMobile.AppRouter.navigate('landingPage/', { trigger: true });
+    thisModule.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
   });
 });
