@@ -33,20 +33,13 @@ define([
     },
     events: {
       'click #addAsset': 'createAsset',
-      'click #getAsset': 'getAsset'
+      'click #getAsset': 'showAssets'
     },
     createAsset: function () {
       app.FTMobile.AppRouter.navigate('createAsset/', { trigger: true });
     },
-    getAsset: function () {
-      this.ambrosus.getAssetById('0x46debb0de0e1ce401da205aa1522df7911488651089e9c5e360802decf1d987d').then(function(response) {
-        // Response if successful
-        console.log(response);
-      }).catch(function(error) {
-        // Error if error
-        console.log(error);
-      });
-
+    showAssets: function () {
+      app.FTMobile.AppRouter.navigate('assetList/', { trigger: true });
     },
     showStatus: function () {
       this.ambrosus = new AmbrosusSDK({

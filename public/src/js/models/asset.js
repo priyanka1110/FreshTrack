@@ -9,6 +9,7 @@ define([
              Backbone) {
   'use strict';
 
+  var Assets;
   var Asset = Backbone.Model.extend({
     defaults: {
       assetName: '',
@@ -23,7 +24,7 @@ define([
 
   exports.assetModel = new Asset();
 
-  var Assets = Backbone.Collection.extend({
+  Assets = Backbone.Collection.extend({
     model: Asset
   });
 

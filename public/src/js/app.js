@@ -1,6 +1,7 @@
+/* eslint-disable */
 /* global define*/
 /* global openDatabase*/
-/* global Offline, cordova, Camera, StatusBar, AmbrosusAddress, AmbrosusSecret*/
+/* global Offline, cordova, Camera, StatusBar, AmbrosusAddress, AmbrosusSecret, AmbrosusSDK*/
 
 define([
   'exports',
@@ -26,7 +27,6 @@ define([
 
   // application start event
   thisModule.FTMobile.on('start', function () {
-
     thisModule.FTMobile.ambrosus = new AmbrosusSDK({
       // Provide env variables
       secret: AmbrosusSecret,
@@ -34,7 +34,6 @@ define([
       Web3: Web3,
       apiEndpoint: 'https://gateway-test.ambrosus.com'
     });
-
     thisModule.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
   });
 });

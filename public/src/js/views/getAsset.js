@@ -8,6 +8,7 @@ define([
   'backbone',
   'moment',
   'materialize',
+  'js/app',
   'js/models/asset',
   'templates/compiledTemplates'
 ], function (
@@ -18,44 +19,36 @@ define([
   Backbone,
   moment,
   materialize,
+  app,
   asset,
   compiledTemplates
 ) {
   'use strict';
-  exports.SummariesAsset = Marionette.View.extend({
+
+  exports.AssetList = Marionette.View.extend({
     initialize: function () {
-      this.ambrosus.getEvents({createdBy: AmbrosusAddress}).then(function(response) {
+      app.FTMobile.ambrosus.getEvents({ createdBy: AmbrosusAddress }).then(function (response) {
         // Response if successful
         response.each(function (assetObj) {
           asset.assetsCollection.add(assetObj);
         });
-      }).catch(function(error) {
+      }).catch(function (error) {
         // Error if error
         console.log(error);
       });
     },
     render: function () {
       this.el.innerHTML = compiledTemplates['templates/assetList.hbs']({
-        assets: asset.assetsCollection.toJson();
+        assets: asset.assetsCollection.toJson()
       });
     },
     onAttach: function () {
     },
     events: {
-      'click #submit': 'submitAsset'
       'click .assetList': 'getAssetDetails'
     },
-    submitAsset: function () {
-      this.ambrosus.createAsset(this.model).then(function(response) {
-        // Response if successful
-        console.log(response);
-      }).catch(function(error) {
-        // Error if error
-        console.log(error);
-      });
-    },
     getAssetDetails: function (event) {
-      app.FTMobile.AppRouter.navigate('assetDetails/?id='event.id, { trigger: true });
+      app.FTMobile.AppRouter.navigate('assetDetails/?id=' + event.id, { trigger: true });
     },
     onDestroy: function () {
     }

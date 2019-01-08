@@ -24,6 +24,7 @@ define([
   compiledTemplates
 ) {
   'use strict';
+
   exports.SummariesAsset = Marionette.View.extend({
     initialize: function () {
     },
@@ -39,37 +40,37 @@ define([
     },
     formatAssetData: function () {
       return [{
-        "content": {
-            "data":[
-              {
-                "type": "ambrosus.asset.info",
-                "assetType": "ambrosus.assetTypes.batch",
-                "productInformation": {
-                  "name": this.model.get('assetName'),
-                  "id": this.model.get('productId')
+        content: {
+          data: [
+            {
+              type: 'ambrosus.asset.info',
+              assetType: 'ambrosus.assetTypes.batch',
+              productInformation: {
+                name: this.model.get('assetName'),
+                id: this.model.get('productId')
+              },
+              location: this.model.get('location'),
+              transferParties: {
+                sender: {
+                  name: this.model.get('sender'),
+                  org: this.model.get('senderOrganization')
                 },
-                "location": this.model.get('location'),
-                "transferParties": {
-                  "sender": {
-                    "name": this.model.get('sender'),
-                    "org": this.model.get('senderOrganization')
-                  },
-                  "receiver": {
-                    "name": this.model.get('receiver'),
-                    "org": this.model.get('receiverOrganization')
-                  }
+                receiver: {
+                  name: this.model.get('receiver'),
+                  org: this.model.get('receiverOrganization')
                 }
               }
-            ]
+            }
+          ]
         }
       }];
     },
     submitAsset: function () {
       var formattedData = this.formatAssetData();
-      app.FTMobile.ambrosus.createAsset(formattedData).then(function(response) {
+      app.FTMobile.ambrosus.createAsset(formattedData).then(function (response) {
         // Response if successful
         console.log(response);
-      }).catch(function(error) {
+      }).catch(function (error) {
         // Error if error
         console.log(error);
       });

@@ -1,4 +1,5 @@
 /* global define*/
+/* eslint-disable */
 
 define([
   'require',

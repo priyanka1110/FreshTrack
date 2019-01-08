@@ -1,4 +1,4 @@
-/* global define, am4core, am4charts, am4themes_animated*/
+/* global define, am4core, am4charts, am4themes_animated, cordova */
 
 define([
   'exports',
@@ -37,13 +37,14 @@ define([
     },
     events: {
       'click #scanCode': 'initializeScanner',
-      'click #goToSummaryPage': 'goToNextPage'
+      'click #goToSummaryPage': 'goToNextPage',
+      'click #cancel': 'cancel'
     },
     initializeScanner: function () {
       var self = this;
       cordova.plugins.barcodeScanner.scan(
         function (result) {
-          asset.assetModel.set({assetName: result.text});
+          asset.assetModel.set({ assetName: result.text });
           console.log(result.text);
           self.render();
         },
@@ -51,6 +52,9 @@ define([
           console.log(error);
         }
       );
+    },
+    cancel: function () {
+      app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
     },
     goToNextPage: function () {
       var needTagData = $('#needProductData')[0].checked;
