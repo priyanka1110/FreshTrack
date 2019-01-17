@@ -42,13 +42,13 @@ define([
       'click #goToHomePage': 'goToHomePage'
     },
     goToHomePage: function () {
-      // TODO: set model default
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
     },
     getAssetDetails: function (events) {
       app.FTMobile.AppRouter.navigate('assetDetails/?id=' + events.id, { trigger: true });
     },
     onDestroy: function () {
+      event.eventCollection.reset();
     }
   });
 });

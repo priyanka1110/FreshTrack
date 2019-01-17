@@ -53,7 +53,6 @@ define([
       return productDetails;
     },
     cancel: function () {
-      // TODO: set model default
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
     },
     addProduct: function () {
@@ -74,6 +73,7 @@ define([
       });
     },
     onDestroy: function () {
+      asset.assetModel.clear().set(asset.assetModel.defaults);
     }
   });
 });

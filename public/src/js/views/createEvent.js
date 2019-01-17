@@ -56,13 +56,11 @@ define([
       return eventDetails;
     },
     cancel: function () {
-      // TODO: set model default
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
     },
     addEvent: function () {
       var eventDetails = {
         content: {
-
           data: [
             this.getFormData()
           ]
@@ -78,6 +76,7 @@ define([
       });
     },
     onDestroy: function () {
+      event.eventModel.clear().set(event.eventModel.defaults);
     }
   });
 });
