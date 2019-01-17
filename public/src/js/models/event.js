@@ -18,8 +18,9 @@ define([
         signature: ''
       },
       eventId: '',
-      metaData: {}
-
+      metaData: {},
+      productId: '',
+      assetId: ''
     }
   });
 

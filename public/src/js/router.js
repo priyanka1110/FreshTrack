@@ -9,6 +9,7 @@ define([
   './app',
   './views/home',
   './views/createAsset',
+  './views/createEvent',
   './views/getAsset',
   './views/summariesAsset',
   './views/assetDetails',
@@ -23,6 +24,7 @@ define([
              app,
              homeView,
              createAsset,
+             createEvent,
              getAsset,
              summariesAsset,
              assetDetails,
@@ -35,6 +37,7 @@ define([
     routes: {
       'homePage/': 'homePage',
       'createAsset/': 'createAsset',
+      'createEvent/': 'createEvent',
       'summariesAsset/': 'summariesAsset',
       'assets/': 'showAsset',
       'assetDetails/:id': 'showAssetDetails',
@@ -45,6 +48,9 @@ define([
     },
     createAsset: function () {
       app.FTMobile.rootView.showChildView('bodyRegion', new createAsset.CreateAsset({ model: asset.assetModel }));
+    },
+    createEvent: function () {
+      app.FTMobile.rootView.showChildView('bodyRegion', new createEvent.CreateAsset({ model: event.eventModel }));
     },
     summariesAsset: function () {
       app.FTMobile.rootView.showChildView('bodyRegion', new summariesAsset.SummariesAsset({ model: asset.assetModel }));

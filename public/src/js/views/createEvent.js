@@ -9,7 +9,7 @@ define([
   'moment',
   'materialize',
   'js/app',
-  'js/models/asset',
+  'js/models/event',
   'templates/compiledTemplates'
 ], function (
   exports,
@@ -20,7 +20,7 @@ define([
   moment,
   materialize,
   app,
-  asset,
+  event,
   compiledTemplates
 ) {
   'use strict';
@@ -29,39 +29,38 @@ define([
     initialize: function () {
     },
     render: function () {
-      this.el.innerHTML = compiledTemplates['templates/createAsset.hbs']({
-        productId: this.model.get('productId')
+      this.el.innerHTML = compiledTemplates['templates/createEvent.hbs']({
+        assetId: this.model.get('assetId')
       });
     },
     onAttach: function () {
     },
     events: {
-      'click #addProduct': 'addProduct',
+      'click #addEvent': 'addEvent',
       'click #cancel': 'cancel'
     },
     getFormData: function () {
-      var productDetails = {
+      var eventDetails = {
         orgName: this.$el.find('#org_name').innerHTML,
         name: this.$el.find('#product_name').innerHTML,
-        productId: this.model.get('productId'),
         type: 'ambrosus.asset.info'
       };
-      asset.assetModel.set(productDetails);
-      return productDetails;
+      event.eventModel.set(eventDetails);
+      return eventDetails;
     },
     cancel: function () {
       // TODO: set model default
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
     },
-    addProduct: function () {
-      var productDetails = [{
+    addEvent: function () {
+      var eventDetails = [{
         content: {
           data: [
             this.getFormData()
           ]
         }
       }];
-      app.FTMobile.ambrosus.createAsset(productDetails).then(function (response) {
+      app.FTMobile.ambrosus.createEvent(this.model.get('assetId'), eventDetails).then(function (response) {
         // Response if successful
         app.FTMobile.AppRouter.navigate('success/', { trigger: true });
         console.log(response);

@@ -37,7 +37,8 @@ define([
     },
     events: {
       'click #addAsset': 'createAsset',
-      'click #getAsset': 'showAssets'
+      'click #getAsset': 'showAssets',
+      'click #addEvent': 'createEvent'
     },
     createAsset: function () {
       var self = this;
@@ -52,6 +53,25 @@ define([
         }
       );
     },
+    createEvent: function () {
+      var self = this;
+      cordova.plugins.barcodeScanner.scan(
+        function (result) {
+          app.FTMobile.ambrosus.getEvents({ "data[productId]": result.text }).then(function (response) {
+            // Response if successful
+            event.eventModel.set({ assetId: response.data.results[0].content.idData.assetId });
+            console.log(result.text);
+            app.FTMobile.AppRouter.navigate('createEvent/', { trigger: true });
+          }).catch(function (error) {
+            // Error if error
+            console.log(error);
+          });
+        },
+        function (error) {
+          console.log("Error in bar code scanner ", error);
+        }
+      );
+    },
     showAssets: function () {
       var self = this;
       cordova.plugins.barcodeScanner.scan(
@@ -60,7 +80,7 @@ define([
             // Response if successful
             app.FTMobile.ambrosus.getEvents(
               { assetId: response.data.results[0].content.idData.assetId }).then(function (response) {
-              response.data.results.each(function (eventObj) {
+              response.data.results.forEach(function (eventObj) {
                 event.eventCollection.add(eventObj);
               });
               console.log(result.text);

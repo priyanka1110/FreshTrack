@@ -29,7 +29,7 @@ define([
     initialize: function () {
     },
     render: function () {
-      var events = event.eventCollection.toJson();
+      var events = event.eventCollection.toJSON();
       this.el.innerHTML = compiledTemplates['templates/assets.hbs']({
         assetName: events[0].content.data[0].name,
         events: events
