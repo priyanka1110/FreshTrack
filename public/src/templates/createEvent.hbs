@@ -1,60 +1,53 @@
-<div class="">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field">
-            <input disabled placeholder="Placeholder" id="product_id" type="text" class="validate" value="{{productId}}">
-            <label for="product_id">Product Id</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="product_name" type="text" class="validate" value={{productName}}>
-            <label for="product_name">Product name</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="sender_org" type="text" class="validate">
-            <label for="sender_org">sender_org</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="sender_name" type="text" class="validate">
-            <label for="sender_name">sender_name</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="receiver_name" type="text" class="validate">
-            <label for="receiver_name">receiver_name</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="receiver_org" type="text" class="validate">
-            <label for="receiver_org">receiver_org</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="addDetails" type="text" class="validate">
-            <label for="addDetails">addDetails</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="location" type="text" class="validate">
-            <label for="location">location</label>
-          </div>
-        </div>
-      </form>
+<div class="col s12 handover-page">
+  <form>
+
+    <div class="input-field">
+      <input disabled id="product_id" type="text" class="validate" value="{{productId}}">
+      <label for="product_id" class="active">Product ID</label>
     </div>
-    <div>
-    	<div> {{productId}} </div>
+
+    <div class="input-field">
+      <input disabled id="product_name" type="text" class="validate" value={{productName}}>
+      <label for="product_name" class="active">Product Name</label>
     </div>
-    <div id="tagType" class="tag-type-card">
-      <button class="btn btn-md orange waves-effect" id="cancel">Cancel</button>
-      <button class="btn btn-md black waves-effect" id="addEvent">Add!</button>
+
+    <div class="input-field">
+      <input id="location" type="text" class="validate">
+      <label for="location">Location</label>
     </div>
+
+    <div class="input-field">
+      <input id="sender_name" type="text" class="validate">
+      <label for="sender_name">Sender Name</label>
+    </div>
+
+    <div class="input-field">
+      <input id="sender_org" type="text" class="validate">
+      <label for="sender_org">Sender's Organization Name</label>
+    </div>
+
+    <div class="input-field">
+      <input id="receiver_name" type="text" class="validate">
+      <label for="receiver_name">Receiver Name</label>
+    </div>
+
+    <div class="input-field">
+      <input id="receiver_org" type="text" class="validate">
+      <label for="receiver_org">Receiver's Organization Name</label>
+    </div>
+
+    <div class="input-field">
+      <textarea id="addDetails" class="materialize-textarea validate"></textarea>
+      <label for="addDetails">Additional Details</label>
+    </div>
+
+  </form>
+
+  <div> {{productId}} </div>
+
+  <div id="tagType" class="button-container">
+    <button class="btn btn-lg orange" id="cancel">Cancel</button>
+    <button class="btn btn-lg black" id="addEvent">Confirm</button>
+  </div>
+
 </div>
