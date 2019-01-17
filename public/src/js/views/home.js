@@ -80,7 +80,6 @@ define([
       cordova.plugins.barcodeScanner.scan(
         function (result) {
           app.FTMobile.ambrosus.getEvents({ "data[productId]": result.text }).then(function (response) {
-            // Response if successful
             app.FTMobile.ambrosus.getEvents(
               { assetId: response.data.results[0].content.idData.assetId }).then(function (response) {
               response.data.results.forEach(function (eventObj) {
