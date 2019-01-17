@@ -57,3 +57,25 @@
 		margin-top: 40px;
 	}
 }
+
+
+.success-page {
+	padding: 0 16px;
+	bottom: auto;
+    left: 50%;
+    max-height: calc(100% - 100px);
+    position: fixed;
+    right: auto;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+
+    p {
+    	font-size: 19px;
+    	margin-bottom: 20px;
+    }
+}
