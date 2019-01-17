@@ -2,12 +2,12 @@
       <form class="col s12">
         <div class="row">
           <div class="input-field col s6">
-            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-            <label for="first_name">First Name</label>
+            <input placeholder="Placeholder" id="product_id" type="text" class="validate" value="{{productId}}">
+            <label for="product_id">Product Id</label>
           </div>
           <div class="input-field col s6">
-            <input id="last_name" type="text" class="validate">
-            <label for="last_name">Last Name</label>
+            <input id="org_name" type="text" class="validate">
+            <label for="org_name">Org Name</label>
           </div>
         </div>
         <div class="row">
@@ -18,8 +18,8 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="password" type="password" class="validate">
-            <label for="password">Password</label>
+            <input id="product_name" type="text" class="validate">
+            <label for="product_name">Product name</label>
           </div>
         </div>
         <div class="row">
@@ -44,12 +44,12 @@
       <button class="btn btn-lg black waves-effect" id="scanCode">Scan the product!</button>
     </div>
     <div>
-    	<div> {{assetName}} </div>
+    	<div> {{productId}} </div>
     </div>
     <input type="checkbox" name="" value="" id="needProductData"> Want to add product data
 
     <div id="tagType" class="tag-type-card">
       <button class="btn btn-md orange waves-effect" id="cancel">Cancel</button>
-      <button class="btn btn-md black waves-effect" id="goToSummaryPage">Proceed!</button>
+      <button class="btn btn-md black waves-effect" id="addProduct">Add!</button>
     </div>
 </div>

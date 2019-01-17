@@ -30,39 +30,45 @@ define([
     },
     render: function () {
       this.el.innerHTML = compiledTemplates['templates/createAssetEvent.hbs']({
-        assetName: this.model.get('assetName')
+        productId: this.model.get('productId')
       });
     },
     onAttach: function () {
     },
     events: {
-      'click #scanCode': 'initializeScanner',
-      'click #goToSummaryPage': 'goToNextPage',
+      'click #addProduct': 'addProduct',
       'click #cancel': 'cancel'
     },
-    initializeScanner: function () {
-      var self = this;
-      cordova.plugins.barcodeScanner.scan(
-        function (result) {
-          asset.assetModel.set({ assetName: result.text });
-          console.log(result.text);
-          self.render();
-        },
-        function (error) {
-          console.log(error);
-        }
-      );
+    getFormData: function () {
+      var productDetails = {
+        orgName: this.$el.find('#org_name').innerHTML,
+        name: this.$el.find('#product_name').innerHTML,
+        productId: this.model.get('productId'),
+        type: 'ambrosus.asset.info'
+      };
+      asset.assetModel.set(productDetails);
+      return productDetails;
     },
     cancel: function () {
+      // TODO: set model default
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
     },
-    goToNextPage: function () {
-      var needTagData = $('#needProductData')[0].checked;
-      if (needTagData) {
-        app.FTMobile.AppRouter.navigate('getTagData/', { trigger: true });
-      } else {
-        app.FTMobile.AppRouter.navigate('summariesAsset/', { trigger: true });
-      }
+    addProduct: function () {
+      var productDetails = [{
+        content: {
+          data: [
+            this.getFormData()
+          ]
+        }
+      }];
+      app.FTMobile.ambrosus.createAsset(productDetails).then(function (response) {
+        // Response if successful
+        app.FTMobile.AppRouter.navigate('success/', { trigger: true });
+        console.log(response);
+      }).catch(function (error) {
+        // Error if error
+        console.log(error);
+      });
     },
     onDestroy: function () {
     }

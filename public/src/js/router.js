@@ -12,7 +12,9 @@ define([
   './views/getAsset',
   './views/summariesAsset',
   './views/assetDetails',
-  './models/asset'
+  './views/successPage',
+  './models/asset',
+  './models/event'
 ], function (require,
              exports,
              Backbone,
@@ -24,7 +26,9 @@ define([
              getAsset,
              summariesAsset,
              assetDetails,
-             asset) {
+             successPage,
+             asset,
+             event) {
   'use strict';
 
   exports.Router = Backbone.Router.extend({
@@ -32,8 +36,9 @@ define([
       'homePage/': 'homePage',
       'createAsset/': 'createAsset',
       'summariesAsset/': 'summariesAsset',
-      'assetList/': 'assetList',
-      'assetDetails/:id': 'showAssetDetails'
+      'assets/': 'showAsset',
+      'assetDetails/:id': 'showAssetDetails',
+      'success/': 'successPage'
     },
     homePage: function () {
       app.FTMobile.rootView.showChildView('bodyRegion', new homeView.HomeView());
@@ -44,8 +49,11 @@ define([
     summariesAsset: function () {
       app.FTMobile.rootView.showChildView('bodyRegion', new summariesAsset.SummariesAsset({ model: asset.assetModel }));
     },
-    assetList: function () {
-      app.FTMobile.rootView.showChildView('bodyRegion', new getAsset.AssetList({ model: asset.assetModel }));
+    showAsset: function () {
+      app.FTMobile.rootView.showChildView('bodyRegion', new getAsset.Assets({ model: event.eventCollection }));
+    },
+    successPage: function () {
+      app.FTMobile.rootView.showChildView('bodyRegion', new successPage.SuccessPage({ model: asset.assetModel }));
     },
     showAssetDetails: function (id) {
       var selectedAsset = asset.assetsCollection.filter(function (assetObj) {

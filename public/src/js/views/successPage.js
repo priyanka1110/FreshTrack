@@ -1,4 +1,4 @@
-/* global define, am4core, am4charts, am4themes_animated, AmbrosusAddress*/
+/* global define, am4core, am4charts, am4themes_animated, cordova */
 
 define([
   'exports',
@@ -9,7 +9,7 @@ define([
   'moment',
   'materialize',
   'js/app',
-  'js/models/event',
+  'js/models/asset',
   'templates/compiledTemplates'
 ], function (
   exports,
@@ -20,33 +20,27 @@ define([
   moment,
   materialize,
   app,
-  event,
+  asset,
   compiledTemplates
 ) {
   'use strict';
 
-  exports.Assets = Marionette.View.extend({
+  exports.SuccessPage = Marionette.View.extend({
     initialize: function () {
     },
     render: function () {
-      var events = event.eventCollection.toJson();
-      this.el.innerHTML = compiledTemplates['templates/assets.hbs']({
-        assetName: events[0].content.data[0].name,
-        events: events
+      this.el.innerHTML = compiledTemplates['templates/successPage.hbs']({
+        productId: this.model.get('productId')
       });
     },
     onAttach: function () {
     },
     events: {
-      'click .assetList': 'getAssetDetails',
       'click #goToHomePage': 'goToHomePage'
     },
     goToHomePage: function () {
       // TODO: set model default
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
-    },
-    getAssetDetails: function (events) {
-      app.FTMobile.AppRouter.navigate('assetDetails/?id=' + events.id, { trigger: true });
     },
     onDestroy: function () {
     }

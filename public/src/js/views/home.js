@@ -10,6 +10,8 @@ define([
   'marionette',
   'materialize',
   'js/app',
+  'js/models/asset',
+  'js/models/event',
   'templates/compiledTemplates',
   'web3',
   'ambrosus'
@@ -21,6 +23,8 @@ define([
              Marionette,
              materialize,
              app,
+             asset,
+             event,
              compiledTemplates,
              Web3) {
   'use strict';
@@ -36,10 +40,44 @@ define([
       'click #getAsset': 'showAssets'
     },
     createAsset: function () {
-      app.FTMobile.AppRouter.navigate('createAsset/', { trigger: true });
+      var self = this;
+      cordova.plugins.barcodeScanner.scan(
+        function (result) {
+          asset.assetModel.set({ productId: result.text });
+          console.log(result.text);
+          app.FTMobile.AppRouter.navigate('createAsset/', { trigger: true });
+        },
+        function (error) {
+          console.log("Error in bar code scanner ", error);
+        }
+      );
     },
     showAssets: function () {
-      app.FTMobile.AppRouter.navigate('assetList/', { trigger: true });
+      var self = this;
+      cordova.plugins.barcodeScanner.scan(
+        function (result) {
+          app.FTMobile.ambrosus.getEvents({ "data[productId]": result.text }).then(function (response) {
+            // Response if successful
+            app.FTMobile.ambrosus.getEvents(
+              { assetId: response.data.results[0].content.idData.assetId }).then(function (response) {
+              response.data.results.each(function (eventObj) {
+                event.eventCollection.add(eventObj);
+              });
+              console.log(result.text);
+              app.FTMobile.AppRouter.navigate('assets/', { trigger: true });
+            }).catch(function (error) {
+              // Error if error
+              console.log(error);
+            });
+          }).catch(function (error) {
+            // Error if error
+            console.log(error);
+          });
+        },
+        function (error) {
+          console.log("Error in bar code scanner ", error);
+        }
+      );
     },
     showStatus: function () {
       this.ambrosus = new AmbrosusSDK({
@@ -74,14 +112,27 @@ define([
 
       var assetData = [{
           "content": {
-              "idData": {
-                  "timestamp": 1519817101
-              },
-              "data": [{
-                  "type": "ambrosus.asset.info",
-                  "name": "PURE DARK CHOCOLATE BAR 92%",
-                  "scannedData": this.scannedData
-              }]
+            "data":[
+              {
+                "type": "ambrosus.asset.info",
+                "productId": "abcd",
+                "name": "PURE DARK CHOCOLATE BAR 92% blah 3",
+                "assetType": "ambrosus.assetTypes.batch",
+                "images": {
+                  "default": {
+                    "url": "http://imageurlgoeshere.com/file.extension"
+                  }
+                },
+                "size": "2.64 oz.",
+                "Product Information": {
+                  "attributes": "No-GMOs, Vegan, Gluten Free, Kosher, Soy Free",
+                  "ingredients": "Organic cocoa beans, organic sugar, organic cocoa butter",
+                  "Brand": "Madecasse"
+                },
+                "Batch Information": {
+                  "Origin": "Madagascar"
+                }
+            }]
           }
       }];
 
