@@ -25,12 +25,14 @@ define([
 ) {
   'use strict';
 
-  exports.CreateAsset = Marionette.View.extend({
+  exports.CreateEvent = Marionette.View.extend({
     initialize: function () {
     },
     render: function () {
       this.el.innerHTML = compiledTemplates['templates/createEvent.hbs']({
-        assetId: this.model.get('assetId')
+        assetId: this.model.get('assetId'),
+        productName: this.model.get('productName'),
+        productId: this.model.get('productId')
       });
     },
     onAttach: function () {
@@ -41,25 +43,29 @@ define([
     },
     getFormData: function () {
       var eventDetails = {
-        orgName: this.$el.find('#org_name').innerHTML,
-        name: this.$el.find('#product_name').innerHTML,
+        name: this.$el.find('#product_name').val(),
+        location: this.$el.find('#location').val(),
+        senderName: this.$el.find('#sender_name').val(),
+        senderOrg: this.$el.find('#sender_org').val(),
+        receiverName: this.$el.find('#receiver_name').val(),
+        receiverorg: this.$el.find('#receiver_org').val(),
+        addDetails: this.$el.find('#addDetails').val(),
         type: 'ambrosus.asset.info'
       };
       event.eventModel.set(eventDetails);
       return eventDetails;
     },
     cancel: function () {
-      // TODO: set model default
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
     },
     addEvent: function () {
-      var eventDetails = [{
+      var eventDetails = {
         content: {
           data: [
             this.getFormData()
           ]
         }
-      }];
+      };
       app.FTMobile.ambrosus.createEvent(this.model.get('assetId'), eventDetails).then(function (response) {
         // Response if successful
         app.FTMobile.AppRouter.navigate('success/', { trigger: true });
@@ -70,6 +76,7 @@ define([
       });
     },
     onDestroy: function () {
+      event.eventModel.clear().set(event.eventModel.defaults);
     }
   });
 });

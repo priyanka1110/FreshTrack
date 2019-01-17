@@ -59,7 +59,10 @@ define([
         function (result) {
           app.FTMobile.ambrosus.getEvents({ "data[productId]": result.text }).then(function (response) {
             // Response if successful
-            event.eventModel.set({ assetId: response.data.results[0].content.idData.assetId });
+            event.eventModel.set({ 
+              assetId: response.data.results[0].content.idData.assetId,
+              productName: response.data.results[0].content.data[0].name,
+              productId: response.data.results[0].content.data[0].productId });
             console.log(result.text);
             app.FTMobile.AppRouter.navigate('createEvent/', { trigger: true });
           }).catch(function (error) {
@@ -77,7 +80,6 @@ define([
       cordova.plugins.barcodeScanner.scan(
         function (result) {
           app.FTMobile.ambrosus.getEvents({ "data[productId]": result.text }).then(function (response) {
-            // Response if successful
             app.FTMobile.ambrosus.getEvents(
               { assetId: response.data.results[0].content.idData.assetId }).then(function (response) {
               response.data.results.forEach(function (eventObj) {

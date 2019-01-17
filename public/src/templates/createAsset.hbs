@@ -2,52 +2,45 @@
       <form class="col s12">
         <div class="row">
           <div class="input-field col s6">
-            <input placeholder="Placeholder" id="product_id" type="text" class="validate" value="{{productId}}">
+            <input disabled placeholder="Placeholder" id="product_id" type="text" class="validate" value="{{productId}}">
             <label for="product_id">Product Id</label>
           </div>
-          <div class="input-field col s6">
-            <input id="org_name" type="text" class="validate">
-            <label for="org_name">Org Name</label>
-          </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-            <label for="disabled">Disabled</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="product_name" type="text" class="validate">
+            <input id="product_name" type="text" class="validate" value={{productName}}>
             <label for="product_name">Product name</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="email" type="email" class="validate">
-            <label for="email">Email</label>
+            <input id="org_name" type="text" class="validate">
+            <label for="org_name">org_name</label>
           </div>
         </div>
         <div class="row">
-          <div class="col s12">
-            This is an inline input field:
-            <div class="input-field inline">
-              <input id="email_inline" type="email" class="validate">
-              <label for="email_inline">Email</label>
-              <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-            </div>
+          <div class="input-field col s12">
+            <input id="location" type="text" class="validate">
+            <label for="location">location</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="addedBy" type="text" class="validate">
+            <label for="addedBy">addedBy</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="addDetails" type="text" class="validate">
+            <label for="addDetails">addDetails</label>
           </div>
         </div>
       </form>
     </div>
-    <div id="tagType" class="tag-type-card">
-      <button class="btn btn-lg black waves-effect" id="scanCode">Scan the product!</button>
-    </div>
     <div>
-    	<div> {{productId}} </div>
+      <div> {{productId}} </div>
     </div>
-    <input type="checkbox" name="" value="" id="needProductData"> Want to add product data
-
     <div id="tagType" class="tag-type-card">
       <button class="btn btn-md orange waves-effect" id="cancel">Cancel</button>
       <button class="btn btn-md black waves-effect" id="addProduct">Add!</button>

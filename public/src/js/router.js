@@ -50,7 +50,7 @@ define([
       app.FTMobile.rootView.showChildView('bodyRegion', new createAsset.CreateAsset({ model: asset.assetModel }));
     },
     createEvent: function () {
-      app.FTMobile.rootView.showChildView('bodyRegion', new createEvent.CreateAsset({ model: event.eventModel }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new createEvent.CreateEvent({ model: event.eventModel }));
     },
     summariesAsset: function () {
       app.FTMobile.rootView.showChildView('bodyRegion', new summariesAsset.SummariesAsset({ model: asset.assetModel }));
