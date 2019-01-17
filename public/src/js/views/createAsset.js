@@ -41,9 +41,12 @@ define([
     },
     getFormData: function () {
       var productDetails = {
-        orgName: this.$el.find('#org_name').innerHTML,
-        name: this.$el.find('#product_name').innerHTML,
+        orgName: this.$el.find('#org_name').val(),
+        name: this.$el.find('#product_name').val(),
         productId: this.model.get('productId'),
+        location: this.$el.find('#location').val(),
+        addedBy: this.$el.find('#addedBy').val(),
+        addDetails: this.$el.find('#addDetails').val(),
         type: 'ambrosus.asset.info'
       };
       asset.assetModel.set(productDetails);
