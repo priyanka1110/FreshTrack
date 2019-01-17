@@ -24,9 +24,22 @@
     text-align: center;
 
     .card-title {
-    	line-height: 120px !important;
+    	line-height: 110px !important;
     	text-transform: uppercase;
     	font-weight: 400;
     	font-size: 22px !important;
     }
+}
+
+.add-product-page {
+	padding: 0 10px;
+
+	.input-field {
+		top: 10px;
+		margin-bottom: 20px;
+	}
+
+	.button-container {
+		margin-top: 40px;
+	}
 }
