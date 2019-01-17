@@ -80,3 +80,34 @@
     	margin-bottom: 20px;
     }
 }
+
+
+.details-product {
+	background-color: #7c949f;
+	text-align: left;
+
+	h5 {
+		margin-bottom: 10px;
+	}
+}
+
+.product-details-page {
+	padding: 0 10px;
+
+	.collection {
+		border: 1px solid transparent !important;
+		
+		.circle {
+			font-style: normal;
+		}
+
+		.secondary-content {
+			font-size: 12px !important;
+		}
+
+		.content-2 {
+			margin-top: 23px;
+			color: #888 !important;
+		}
+	}
+}
