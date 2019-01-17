@@ -1,48 +1,43 @@
-<div class="">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s6">
-            <input disabled placeholder="Placeholder" id="product_id" type="text" class="validate" value="{{productId}}">
-            <label for="product_id">Product Id</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="product_name" type="text" class="validate" value={{productName}}>
-            <label for="product_name">Product name</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="org_name" type="text" class="validate">
-            <label for="org_name">org_name</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="location" type="text" class="validate">
-            <label for="location">location</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="addedBy" type="text" class="validate">
-            <label for="addedBy">addedBy</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="addDetails" type="text" class="validate">
-            <label for="addDetails">addDetails</label>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div>
-      <div> {{productId}} </div>
-    </div>
-    <div id="tagType" class="tag-type-card">
-      <button class="btn btn-md orange waves-effect" id="cancel">Cancel</button>
-      <button class="btn btn-md black waves-effect" id="addProduct">Add!</button>
-    </div>
+<div class="add-product-page col s12">
+  <form>
+      <div class="input-field">
+        <input disabled  id="product_id" type="text" class="validate" value="{{productId}}">
+        <label for="product_id" class="active">Product ID</label>
+      </div>
+
+      <div class="input-field">
+        <input id="org_name" type="text" class="validate">
+        <label for="org_name">Organization Name</label>
+      </div>
+
+      <div class="input-field">
+        <input id="product_name" type="text" class="validate" value={{productName}}>
+        <label for="product_name">Product Name</label>
+      </div>
+
+      <div class="input-field">
+        <input id="location" type="text" class="validate">
+        <label for="location">Location</label>
+      </div>
+
+      <div class="input-field">
+        <input id="addedBy" type="text" class="validate">
+        <label for="addedBy">Added By</label>
+      </div>
+
+      <div class="input-field">
+        <input id="addDetails" type="text" class="validate">
+        <label for="addDetails">Additional Details</label>
+      </div>
+
+  </form>
+
+  <div>
+    <div> {{productId}} </div>
+  </div>
+
+  <div id="tagType" class="button-container">
+    <button class="btn btn-lg orange" id="cancel">Cancel</button>
+    <button class="btn btn-lg black" id="addProduct">Add Product</button>
+  </div>
 </div>
