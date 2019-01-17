@@ -2,3 +2,31 @@
   font-size: 22px !important;
   left: 16% !important;
 }
+
+.bg-add-product {
+	background-color: #4a8d9c;
+}
+
+.bg-handover {
+	background-color: #b84275;
+}
+
+.bg-view-product {
+	background-color: #9b4683;
+}
+
+.home-card {
+    height: 150px;
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    text-align: center;
+
+    .card-title {
+    	line-height: 120px !important;
+    	text-transform: uppercase;
+    	font-weight: 400;
+    	font-size: 22px !important;
+    }
+}
