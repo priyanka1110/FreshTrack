@@ -96,7 +96,7 @@
 
 	.collection {
 		border: 1px solid transparent !important;
-		
+
 		.circle {
 			font-style: normal;
 		}
@@ -110,4 +110,11 @@
 			color: #888 !important;
 		}
 	}
+}
+
+.preloader-wrapper {
+    left: 43%;
+    position: fixed;
+    right: auto;
+    top: 50%;
 }
