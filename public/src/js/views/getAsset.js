@@ -30,8 +30,9 @@ define([
     },
     render: function () {
       var events = event.eventCollection.toJSON();
+      var productDetails = _.last(events).content.data[0];
       this.el.innerHTML = compiledTemplates['templates/assets.hbs']({
-        assetName: events[0].content.data[0].name,
+        productDetails: productDetails,
         events: events
       });
     },

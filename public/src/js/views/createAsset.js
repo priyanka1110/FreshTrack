@@ -47,7 +47,8 @@ define([
         location: this.$el.find('#location').val(),
         addedBy: this.$el.find('#addedBy').val(),
         addDetails: this.$el.find('#addDetails').val(),
-        type: 'ambrosus.asset.info'
+        type: 'ambrosus.asset.info',
+        time: moment.utc().toISOString()
       };
       asset.assetModel.set(productDetails);
       return productDetails;

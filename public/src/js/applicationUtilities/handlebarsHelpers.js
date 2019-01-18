@@ -18,8 +18,8 @@ define([
              str) {
   'use strict';
 
-  Handlebars.registerHelper('readableIndex', function (number) {
-    return number + 1;
+  Handlebars.registerHelper('humanizeTime', function (isoString) {
+    return moment(isoString).format("MMM Do YY");;
   });
 
 });
