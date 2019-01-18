@@ -14,7 +14,10 @@ define([
 
   exports.HeaderView = Marionette.View.extend({
     render: function () {
-      this.el.innerHTML = compiledTemplates['templates/header.hbs']({ headerText: this.model.get('headerText') });
+      this.el.innerHTML = compiledTemplates['templates/header.hbs']({
+        headerText: this.model.get('headerText'),
+        closeButton: this.model.get('closeButton')
+      });
     }
   });
 });

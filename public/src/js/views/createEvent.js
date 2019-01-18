@@ -52,7 +52,8 @@ define([
         receiverName: this.$el.find('#receiver_name').val(),
         receiverorg: this.$el.find('#receiver_org').val(),
         addDetails: this.$el.find('#addDetails').val(),
-        type: 'ambrosus.asset.info'
+        type: 'ambrosus.asset.info',
+        time: moment.utc().toISOString()
       };
       event.eventModel.set(eventDetails);
       return eventDetails;

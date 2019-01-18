@@ -9,12 +9,12 @@ define([
              Backbone) {
   'use strict';
 
-  var Header = Backbone.Model.extend({
+  var User = Backbone.Model.extend({
     defaults: {
-      headerText: '',
-      currentPage: 'home',
-      closeButton: false
+      userName: '',
+      email: '',
+      orgName: ''
     }
   });
-  exports.headerModel = new Header();
+  exports.userModel = new User();
 });

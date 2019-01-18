@@ -45,9 +45,15 @@ define([
       'summariesAsset/': 'summariesAsset',
       'assets/': 'showAsset',
       'assetDetails/:id': 'showAssetDetails',
-      'success/': 'successPage'
+      'success/': 'successPage',
+      'users/': 'profile'
     },
     homePage: function () {
+      headerModel.headerModel.set({ headerText: 'Home' });
+      app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new homeView.HomeView());
+    },
+    profile: function () {
       headerModel.headerModel.set({ headerText: 'Home' });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new homeView.HomeView());
