@@ -30,7 +30,7 @@ define([
     },
     render: function () {
       this.el.innerHTML = compiledTemplates['templates/successPage.hbs']({
-        productId: this.model.get('productId')
+        successText: this.successText
       });
     },
     onAttach: function () {

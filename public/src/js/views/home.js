@@ -12,6 +12,7 @@ define([
   'js/app',
   'js/models/asset',
   'js/models/event',
+  'js/models/header',
   'templates/compiledTemplates',
   'web3',
   'ambrosus'
@@ -25,6 +26,7 @@ define([
              app,
              asset,
              event,
+             header,
              compiledTemplates,
              Web3) {
   'use strict';
@@ -64,6 +66,7 @@ define([
               productName: response.data.results[0].content.data[0].name,
               productId: response.data.results[0].content.data[0].productId });
             console.log(result.text);
+            header.headerModel.set({ currentPage: 'handover' });
             app.FTMobile.AppRouter.navigate('createEvent/', { trigger: true });
           }).catch(function (error) {
             // Error if error
@@ -100,80 +103,6 @@ define([
           console.log("Error in bar code scanner ", error);
         }
       );
-    },
-    showStatus: function () {
-      this.ambrosus = new AmbrosusSDK({
-        // Provide env variables
-        secret: '0x77a205c98095ae3218fae2ea197355bdf53a6aa65bb6b5a7a5a7dbf6d3048bfc',
-        address: '0x4267346d85270127740f00A16D19aC836D2d798b',
-        Web3: Web3,
-        apiEndpoint: 'https://gateway-test.ambrosus.com'
-      });
-      console.log('status here...');
-      // app.FTMobile.AppRouter.navigate('summary/checkStatus', { trigger: true });
-
-      var eventData = [{
-        'type': 'ambrosus.asset.info',
-        'name': 'PURE DARK CHOCOLATE BAR 94%',
-        'assetType': 'ambrosus.assetTypes.batch',
-        'images': {
-          'default': {
-            'url': 'http://imageurlgoeshere.com/file.extension'
-          }
-        },
-        'size': '2.64 oz.',
-        'Product Information': {
-          'attributes': 'No-GMOs, Vegan, Gluten Free, Kosher, Soy Free',
-          'ingredients': 'Organic cocoa beans, organic sugar, organic cocoa butter',
-          'Brand': 'Madecasse'
-        },
-        'Batch Information': {
-          'Origin': 'Madagascar'
-        }
-      }];
-
-      var assetData = [{
-          "content": {
-            "data":[
-              {
-                "type": "ambrosus.asset.info",
-                "productId": "abcd",
-                "name": "PURE DARK CHOCOLATE BAR 92% blah 3",
-                "assetType": "ambrosus.assetTypes.batch",
-                "images": {
-                  "default": {
-                    "url": "http://imageurlgoeshere.com/file.extension"
-                  }
-                },
-                "size": "2.64 oz.",
-                "Product Information": {
-                  "attributes": "No-GMOs, Vegan, Gluten Free, Kosher, Soy Free",
-                  "ingredients": "Organic cocoa beans, organic sugar, organic cocoa butter",
-                  "Brand": "Madecasse"
-                },
-                "Batch Information": {
-                  "Origin": "Madagascar"
-                }
-            }]
-          }
-      }];
-
-      this.ambrosus.createAsset(assetData).then(function(response) {
-        // Response if successful
-        console.log(response);
-      }).catch(function(error) {
-        // Error if error
-        console.log(error);
-      });
-
-      // var assetId = '0xc0cdb3f2b81d928369de4143cdb1a20e5ecdec09e0ea123dd828bdcc55a12345';
-      // this.ambrosus.createEvent(eventData).then(function(response) {
-      //   // Response if successful
-      //   console.log(response);
-      // }).catch(function(error) {
-      //   // Error if error
-      //   console.log(error);
-      // });
     }
   });
 });
