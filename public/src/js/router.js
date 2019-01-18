@@ -43,7 +43,7 @@ define([
     routes: {
       'homePage/': 'homePage',
       'createAsset/': 'createAsset',
-      'createEvent/': 'createEvent',
+      'transactions/': 'createEvent',
       'summariesAsset/': 'summariesAsset',
       'assets/': 'showAsset',
       'assetDetails/:id': 'showAssetDetails',

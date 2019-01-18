@@ -38,9 +38,10 @@ define([
       this.el.innerHTML = compiledTemplates['templates/homePage.hbs']();
     },
     events: {
-      // 'click #addAsset': 'createAsset',
+      'click #editProfile': 'createAsset',
       'click #getAsset': 'showAssets',
-      'click #addEvent': 'createEvent'
+      'click #addTransaction': 'createTransaction',
+      'click #showConfirmationCode': 'showConfirmationCode'
     },
     createAsset: function () {
       var self = this;
@@ -55,20 +56,29 @@ define([
         }
       );
     },
-    createEvent: function () {
+    createTransaction: function () {
       var self = this;
+      // var proxy = 'https://cors-anywhere.herokuapp.com/';
+      var deffereds = [];
       cordova.plugins.barcodeScanner.scan(
         function (result) {
-          app.FTMobile.ambrosus.getEvents({ "data[productId]": result.text }).then(function (response) {
+          deffereds.push(app.FTMobile.ambrosus.getEvents({ "data[productId]": result.text }));
+          // remove the proxy if you can handle CORS
+          deffereds.push($.ajax({
+            url: "https://api.upcitemdb.com/prod/trial/lookup?upc=" + result.text,
+            type: 'GET'
+          }));
+          $.when.apply($, deffereds).then(function (transResponse, assetResponse) {
             // Response if successful
             event.eventModel.set({ 
-              assetId: response.data.results[0].content.idData.assetId,
-              productName: response.data.results[0].content.data[0].name,
-              productId: response.data.results[0].content.data[0].productId });
+              assetId: transResponse.data.results[0].content.idData.assetId,
+              productName: assetResponse.items[0].title,
+              productId: transResponse.data.results[0].content.data[0].productId
+            });
             console.log(result.text);
             header.headerModel.set({ currentPage: 'handover' });
-            app.FTMobile.AppRouter.navigate('createEvent/', { trigger: true });
-          }).catch(function (error) {
+            app.FTMobile.AppRouter.navigate('transactions/', { trigger: true });
+          },function (error) {
             // Error if error
             console.log(error);
           });

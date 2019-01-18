@@ -18,8 +18,8 @@ define([
     render: function () {
       this.el.innerHTML = compiledTemplates['templates/user.hbs']({
         userName: localStorage.getItem('userName'),
-        orgName: localStorage.setItem('orgName'),
-        email: localStorage.setItem('email')
+        orgName: localStorage.getItem('orgName'),
+        email: localStorage.getItem('email')
       });
     },
     events: {
