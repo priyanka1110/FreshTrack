@@ -58,7 +58,7 @@ define([
     profile: function () {
       headerModel.headerModel.set({
         headerText: 'Profile',
-        closeButton: true
+        closeButton: false
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new userDetails.UserView());
