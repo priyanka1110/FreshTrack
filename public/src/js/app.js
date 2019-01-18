@@ -34,6 +34,10 @@ define([
       Web3: Web3,
       apiEndpoint: 'https://gateway-test.ambrosus.com'
     });
-    thisModule.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
+    if (localStorage.getItem('email')) {
+      thisModule.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
+    } else {
+      thisModule.FTMobile.AppRouter.navigate('users/', { trigger: true });
+    }
   });
 });
