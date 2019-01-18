@@ -15,6 +15,7 @@ define([
   './views/assetDetails',
   './views/successPage',
   './views/header',
+  './views/userDetails',
   './models/asset',
   './models/event',
   'js/models/header'
@@ -32,6 +33,7 @@ define([
              assetDetails,
              successPage,
              header,
+             userDetails,
              asset,
              event,
              headerModel) {
@@ -54,9 +56,12 @@ define([
       app.FTMobile.rootView.showChildView('bodyRegion', new homeView.HomeView());
     },
     profile: function () {
-      headerModel.headerModel.set({ headerText: 'Home' });
+      headerModel.headerModel.set({
+        headerText: 'Profile',
+        closeButton: false
+      });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
-      app.FTMobile.rootView.showChildView('bodyRegion', new homeView.HomeView());
+      app.FTMobile.rootView.showChildView('bodyRegion', new userDetails.UserView());
     },
     createAsset: function () {
       headerModel.headerModel.set({ headerText: 'Add Product' });
