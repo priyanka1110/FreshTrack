@@ -30,7 +30,7 @@ define([
     },
     render: function () {
       this.el.innerHTML = compiledTemplates['templates/successPage.hbs']({
-        successText: this.successText
+        successText: this.options.successText
       });
     },
     onAttach: function () {
