@@ -38,13 +38,16 @@ define([
       this.el.innerHTML = compiledTemplates['templates/homePage.hbs']();
     },
     events: {
-      'click #editProfile': 'createAsset',
+      'click #editProfile': 'editProfile',
       'click #getAsset': 'showAssets',
       'click #addTransaction': 'createTransaction',
       'click #showConfirmationCode': 'showConfirmationCode'
     },
     showConfirmationCode: function () {
       app.FTMobile.AppRouter.navigate('confimationCode/show/', { trigger: true });
+    },
+    editProfile: function () {
+      app.FTMobile.AppRouter.navigate('users/', { trigger: true });
     },
     createAsset: function () {
       var self = this;
