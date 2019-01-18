@@ -16,10 +16,10 @@ define([
 
   exports.UserView = Marionette.View.extend({
     render: function () {
-      this.el.innerHTML = compiledTemplates['templates/user.hbs']({ 
+      this.el.innerHTML = compiledTemplates['templates/user.hbs']({
         userName: localStorage.getItem('userName'),
         orgName: localStorage.setItem('orgName'),
-        email: localStorage.setItem('email') 
+        email: localStorage.setItem('email')
       });
     },
     events: {
@@ -29,7 +29,7 @@ define([
       var userName = this.$el.find('#userName').val();
       var orgName = this.$el.find('#orgName').val();
       var email = this.$el.find('#email').val();
-      if( userName && orgName && email) {
+      if (userName && orgName && email) {
         localStorage.setItem('email', email);
         localStorage.setItem('userName', userName);
         localStorage.setItem('orgName', orgName);

@@ -38,7 +38,7 @@ define([
       this.el.innerHTML = compiledTemplates['templates/homePage.hbs']();
     },
     events: {
-      'click #addAsset': 'createAsset',
+      // 'click #addAsset': 'createAsset',
       'click #getAsset': 'showAssets',
       'click #addEvent': 'createEvent'
     },
