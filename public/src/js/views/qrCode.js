@@ -1,4 +1,4 @@
-/* global define, device, cordova */
+/* global define, device, M, cordova */
 
 define([
   'exports',
@@ -43,9 +43,9 @@ define([
         organizationName: localStorage.getItem('orgName')
       };
       var self = this;
-      this.getLocationData(function () {
-        // qrCodeData.location.latitude = position.coords.latitude;
-        // qrCodeData.location.longitude = position.coords.longitude;
+      this.getLocationData(function (position) {
+        qrCodeData.location.latitude = position.coords.latitude;
+        qrCodeData.location.longitude = position.coords.longitude;
         qrCodeData.confirmtationCodeGeneratedAt = moment().format();
         $(self.el).find('#confirmationCode').html('');
 
@@ -58,10 +58,15 @@ define([
     },
     checkLocationServiceStatus: function (successCallback) {
       cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {
+        var elems;
+        var instance;
         if (enabled) {
           successCallback();
         } else {
-          cordova.plugins.diagnostic.switchToLocationSettings();
+          elems = document.querySelectorAll('.modal');
+          M.Modal.init(elems);
+          instance = M.Modal.getInstance(elems[0]);
+          instance.open();
         }
       });
     },
