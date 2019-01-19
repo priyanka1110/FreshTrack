@@ -62,9 +62,10 @@ define([
         }
       );
     },
-    getEventSuccessCallback: function (transResponse, assetResponse) {
+    getEventSuccessCallback: function (transResponse, assetResponse, productId) {
       if (transResponse.data.resultCount === 0) {
         assetModel.assetModel.set(assetResponse[0].items[0]);
+        assetModel.assetModel.set({ ean: productId });
         app.FTMobile.AppRouter.navigate('assetNotFound/', { trigger: true });
       } else {
         // Response if successful
@@ -91,7 +92,7 @@ define([
           }));
           $.when.apply($, deffereds).then(function (transPromise, assetResponse) {
             transPromise.then(function (transResponse) {
-              self.getEventSuccessCallback(transResponse, assetResponse);
+              self.getEventSuccessCallback(transResponse, assetResponse, result.text);
             }).catch(function (error) {
               // Error if error
               console.log(error);
