@@ -13,7 +13,8 @@ define([
     defaults: {
       headerText: '',
       currentPage: 'home',
-      closeButton: false
+      closeButton: false,
+      headerButtons: false
     }
   });
   exports.headerModel = new Header();

@@ -23,7 +23,8 @@ define([
     render: function () {
       this.el.innerHTML = compiledTemplates['templates/header.hbs']({
         headerText: this.model.get('headerText'),
-        closeButton: this.model.get('closeButton')
+        closeButton: this.model.get('closeButton'),
+        headerButtons: this.model.get('headerButtons')
       });
     },
     events: {
@@ -41,6 +42,9 @@ define([
     },
     showConfirmationCode: function () {
       app.FTMobile.AppRouter.navigate('confirmationCode/show/', { trigger: true });
+    },
+    onDestroy: function () {
+      // this.model.clear().set(this.model.defaults);
     }
   });
 });
