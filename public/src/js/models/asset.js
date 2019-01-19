@@ -12,13 +12,20 @@ define([
   var Assets;
   var Asset = Backbone.Model.extend({
     defaults: {
-      assetName: '',
-      productId: '',
-      location: '',
-      sender: '',
-      senderOrganization: '',
-      receiver: '',
-      receiverOrganization: ''
+      ean: '',
+      title: '',
+      description: '',
+      elid: '',
+      brand: '',
+      model: '',
+      color: '',
+      size: '',
+      dimension: '',
+      weight: '',
+      lowest_recorded_price: null,
+      highest_recorded_price: null,
+      images: [],
+      offers: []
     }
   });
 

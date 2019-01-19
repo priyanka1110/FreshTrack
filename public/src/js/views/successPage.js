@@ -36,11 +36,14 @@ define([
     onAttach: function () {
     },
     events: {
-      'click #goToHomePage': 'goToHomePage'
+      'click #goToHomePage': 'goToHomePage',
+      'click #handover': 'showHandover'
     },
     goToHomePage: function () {
       // TODO: set model default
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
+    },
+    showHandover: function () {
     },
     onDestroy: function () {
     }
