@@ -10,6 +10,7 @@ define([
   'materialize',
   'js/app',
   'js/models/event',
+  'js/models/header',
   'templates/compiledTemplates'
 ], function (
   exports,
@@ -21,6 +22,7 @@ define([
   materialize,
   app,
   event,
+  header,
   compiledTemplates
 ) {
   'use strict';
@@ -55,6 +57,7 @@ define([
     },
     onDestroy: function () {
       event.eventCollection.reset();
+      header.headerModel.set({ closeButton: false });
     }
   });
 });

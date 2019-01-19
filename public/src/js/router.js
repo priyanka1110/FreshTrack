@@ -56,14 +56,23 @@ define([
       'users/': 'profile'
     },
     homePage: function () {
-      headerModel.headerModel.set({ headerText: 'Home' });
+      headerModel.headerModel.set({
+        headerText: 'Home',
+        closeButton: false
+      });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new homeView.HomeView());
     },
     profile: function () {
+      var enableCloseButton;
+      if (headerModel.headerModel.get('currentPage') === 'profile') {
+        enableCloseButton = true;
+      } else {
+        enableCloseButton = true;
+      }
       headerModel.headerModel.set({
         headerText: 'Profile',
-        closeButton: false
+        closeButton: enableCloseButton
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new userDetails.UserView());
@@ -92,7 +101,7 @@ define([
     showConfimationCode: function () {
       headerModel.headerModel.set({
         headerText: 'Confirmation Code',
-        closeButton: false
+        closeButton: true
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new qrCode.ConfirmationCode({ model: event.eventModel }));
@@ -121,7 +130,10 @@ define([
     showAsset: function () {
       var events = event.eventCollection.toJSON();
       var headerText = events[0] ? events[0].content.data[0].name : 'No transactions found';
-      headerModel.headerModel.set({ headerText: headerText });
+      headerModel.headerModel.set({
+        headerText: headerText,
+        closeButton: true
+      });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new getAsset.Assets({ model: event.eventCollection }));
     },
