@@ -46,7 +46,7 @@
 }
 
 .asset-found-page {
-	padding: 10px;
+	padding: 0 16px;
 	
 	.asset-message {
 		color: #000 !important;
@@ -57,10 +57,14 @@
 		}
 	}
 
-	// .collection {
-	// 	margin: 30px -10px;
- //    	border-top: 1px solid #ddd !important;	
-	// }
+	button {
+		margin-right: 7px;
+	}
+	
+	.collection {
+		margin: 0 -16px;
+    	// border-top: 1px solid #ddd !important;	
+	}
 
 	 .collection .collection-item.avatar {
 	 	min-height: 72px !important;

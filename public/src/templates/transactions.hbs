@@ -17,7 +17,7 @@
 	<ul class="collection">
 		{{#each events}}
 		    <li class="collection-item avatar" id="{{eventId}}">
-		      	<i class="circle">J</i>
+		      	<i class="circle bg-indigo">{{points}}</i>
 		      	<span class="title">{{content.data.[0].senderName}}</span>
 		      	<p>{{content.data.[0].receiverName}}</p>
 		      	<span class="secondary-content">{{humanizeTime content.data.[0].time}}</span>
