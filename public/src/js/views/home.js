@@ -1,6 +1,5 @@
-/* eslint-disable */
 /* global define */
-/* global mixpanel, powerbi */
+/* global mixpanel, cordova, device, powerbi */
 define([
   'require',
   'exports',
@@ -14,7 +13,6 @@ define([
   'js/models/event',
   'js/models/header',
   'templates/compiledTemplates',
-  'web3',
   'ambrosus'
 ], function (require,
              exports,
@@ -27,8 +25,7 @@ define([
              assetModel,
              event,
              header,
-             compiledTemplates,
-             Web3) {
+             compiledTemplates) {
   'use strict';
 
   exports.HomeView = Marionette.View.extend({
@@ -50,7 +47,6 @@ define([
       app.FTMobile.AppRouter.navigate('users/', { trigger: true });
     },
     createAsset: function () {
-      var self = this;
       cordova.plugins.barcodeScanner.scan(
         function (result) {
           assetModel.assetModel.set({ productId: result.text });
@@ -58,7 +54,7 @@ define([
           app.FTMobile.AppRouter.navigate('createAsset/', { trigger: true });
         },
         function (error) {
-          console.log("Error in bar code scanner ", error);
+          console.log('Error in bar code scanner ', error);
         }
       );
     },
@@ -70,7 +66,7 @@ define([
       } else {
         // Response if successful
         assetModel.assetModel.set(assetResponse[0].items[0]);
-        event.eventModel.set({ 
+        event.eventModel.set({
           assetId: transResponse.data.results[0].content.idData.assetId,
           productId: transResponse.data.results[0].content.data[0].productId
         });
@@ -84,10 +80,10 @@ define([
       var deffereds = [];
       cordova.plugins.barcodeScanner.scan(
         function (result) {
-          deffereds.push(app.FTMobile.ambrosus.getEvents({ "data[productId]": result.text }));
+          deffereds.push(app.FTMobile.ambrosus.getEvents({ 'data[productId]': result.text }));
           // remove the proxy if you can handle CORS
           deffereds.push($.ajax({
-            url: "https://api.upcitemdb.com/prod/trial/lookup?upc=" + result.text,
+            url: 'https://api.upcitemdb.com/prod/trial/lookup?upc=' + result.text,
             type: 'GET'
           }));
           $.when.apply($, deffereds).then(function (transPromise, assetResponse) {
@@ -96,42 +92,27 @@ define([
             }).catch(function (error) {
               // Error if error
               console.log(error);
-            })
-          },function (error) {
+            });
+          }, function (error) {
             // Error if error
             console.log(error);
           });
         },
         function (error) {
-          console.log("Error in bar code scanner ", error);
+          console.log('Error in bar code scanner ', error);
         }
       );
     },
     showAssets: function () {
-      var self = this;
-      cordova.plugins.barcodeScanner.scan(
-        function (result) {
-          app.FTMobile.ambrosus.getEvents({ "data[productId]": result.text }).then(function (response) {
-            app.FTMobile.ambrosus.getEvents(
-              { assetId: response.data.results[0].content.idData.assetId }).then(function (response) {
-              response.data.results.forEach(function (eventObj) {
-                event.eventCollection.add(eventObj);
-              });
-              console.log(result.text);
-              app.FTMobile.AppRouter.navigate('assets/', { trigger: true });
-            }).catch(function (error) {
-              // Error if error
-              console.log(error);
-            });
-          }).catch(function (error) {
-            // Error if error
-            console.log(error);
-          });
-        },
-        function (error) {
-          console.log("Error in bar code scanner ", error);
-        }
-      );
+      app.FTMobile.ambrosus.getEvents({ 'data[device]': device.uuid }).then(function (response) {
+        response.data.results.forEach(function (eventObj) {
+          event.eventCollection.add(eventObj);
+        });
+        app.FTMobile.AppRouter.navigate('assets/', { trigger: true });
+      }).catch(function (error) {
+        // Error if error
+        console.log(error);
+      });
     }
   });
 });
