@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* global define, d3*/
 /* eslint-disable no-mixed-operators*/
 define([

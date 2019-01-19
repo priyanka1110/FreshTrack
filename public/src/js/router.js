@@ -45,7 +45,7 @@ define([
     routes: {
       'homePage/': 'homePage',
       'createAsset/': 'createAsset',
-      'transactions/:doneBy': 'createEvent',
+      'transactions/': 'createEvent',
       'assetNotFound/': 'showAssetNotFound',
       'assetFound/': 'showAssetFound',
       'confirmationCode/show/': 'showConfimationCode',

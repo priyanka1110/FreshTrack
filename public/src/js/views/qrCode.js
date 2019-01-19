@@ -10,6 +10,7 @@ define([
   'materialize',
   'qrcode',
   'js/app',
+  'js/models/event',
   'templates/compiledTemplates'
 ], function (
   exports,
@@ -21,6 +22,7 @@ define([
   materialize,
   qrcode,
   app,
+  event,
   compiledTemplates
 ) {
   'use strict';
@@ -80,16 +82,52 @@ define([
     events: {
       'click #scan': 'scanCode'
     },
+    getFormData: function () {
+      var eventDetails = {
+        name: this.model.get('title') || '',
+        // location: this.model.get('location'),
+        senderName: this.model.get('senderName'),
+        senderOrg: this.model.get('senderOrg'),
+        receiverName: this.model.get('receiverName'),
+        receiverOrg: this.model.get('receiverOrg'),
+        device: device.uuid,
+        type: 'ambrosus.asset.info',
+        time: moment.utc().toISOString()
+      };
+      event.eventModel.set(eventDetails);
+      return eventDetails;
+    },
+    cancel: function () {
+      app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
+    },
+    addEvent: function () {
+      var eventDetails = {
+        content: {
+          data: [
+            this.getFormData()
+          ]
+        }
+      };
+      app.FTMobile.ambrosus.createEvent(this.model.get('assetId'), eventDetails).then(function (response) {
+        // Response if successful
+        app.FTMobile.AppRouter.navigate('success/', { trigger: true });
+        console.log(response);
+      }).catch(function (error) {
+        // Error if error
+        console.log(error);
+      });
+    },
     scanCode: function () {
       var senderName;
       var senderOrg;
       var receiverName;
       var receiverOrg;
-      var secondPartyDetail = JSON.parse(result.text);
-      var self;
+      var secondPartyDetail;
+      var self = this;
       cordova.plugins.barcodeScanner.scan(
         function (result) {
           // assetModel.assetModel.set({ productId: result.text });
+          secondPartyDetail = JSON.parse(result.text);
           if (self.doneBy === 'sender') {
             senderName = localStorage.getItem('userName');
             senderOrg = localStorage.getItem('orgName');
@@ -108,7 +146,7 @@ define([
             receiverOrg: receiverOrg
           });
           console.log(result.text);
-          app.FTMobile.AppRouter.navigate('transactions/', { trigger: true });
+          self.addEvent();
         },
         function (error) {
           console.log('Error in bar code scanner ', error);
