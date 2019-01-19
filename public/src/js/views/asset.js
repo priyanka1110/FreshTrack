@@ -1,4 +1,4 @@
-/* global define, am4core, am4charts, am4themes_animated, cordova */
+/* global define, device, cordova */
 
 define([
   'exports',
@@ -44,6 +44,7 @@ define([
         productId: this.model.get('ean'),
         addedBy: localStorage.getItem('userName'),
         points: this.model.get('points'),
+        device: device.uuid,
         type: 'ambrosus.asset.info',
         time: moment.utc().toISOString(),
         name: this.model.get('title')

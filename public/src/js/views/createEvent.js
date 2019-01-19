@@ -1,4 +1,4 @@
-/* global define, am4core, am4charts, am4themes_animated, cordova */
+/* global define, device, cordova */
 
 define([
   'exports',
@@ -52,6 +52,7 @@ define([
         receiverName: this.$el.find('#receiver_name').val(),
         receiverorg: this.$el.find('#receiver_org').val(),
         addDetails: this.$el.find('#addDetails').val(),
+        device: device.uuid,
         type: 'ambrosus.asset.info',
         time: moment.utc().toISOString()
       };
