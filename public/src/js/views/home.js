@@ -41,7 +41,7 @@ define([
       'click #showConfirmationCode': 'showConfirmationCode'
     },
     showConfirmationCode: function () {
-      app.FTMobile.AppRouter.navigate('confimationCode/show/', { trigger: true });
+      app.FTMobile.AppRouter.navigate('confirmationCode/show/', { trigger: true });
     },
     editProfile: function () {
       app.FTMobile.AppRouter.navigate('users/', { trigger: true });

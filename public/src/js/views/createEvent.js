@@ -31,6 +31,7 @@ define([
     initialize: function () {
     },
     render: function () {
+      var transDoneBy = this.options.doneBy;
       this.el.innerHTML = compiledTemplates['templates/createEvent.hbs']({
         assetId: this.model.get('assetId'),
         productName: this.model.get('productName'),
@@ -45,13 +46,12 @@ define([
     },
     getFormData: function () {
       var eventDetails = {
-        name: this.$el.find('#product_name').val(),
-        location: this.$el.find('#location').val(),
-        senderName: this.$el.find('#sender_name').val(),
-        senderOrg: this.$el.find('#sender_org').val(),
-        receiverName: this.$el.find('#receiver_name').val(),
-        receiverorg: this.$el.find('#receiver_org').val(),
-        addDetails: this.$el.find('#addDetails').val(),
+        name: this.model.get('title'),
+        location: this.model.get('location'),
+        senderName: this.model.get('senderName'),
+        senderOrg: this.model.get('senderOrg'),
+        receiverName: this.model.get('receiverName'),
+        receiverorg: this.model.get('receiverorg'),
         device: device.uuid,
         type: 'ambrosus.asset.info',
         time: moment.utc().toISOString()
