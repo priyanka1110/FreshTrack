@@ -168,3 +168,24 @@
 		line-height: 56px;
 	}
 }
+
+
+.transaction-page {
+
+	.collection {
+		border: 1px solid transparent !important;
+
+		.circle {
+			font-style: normal;
+		}
+
+		.secondary-content {
+			font-size: 12px !important;
+		}
+
+		.content-2 {
+			margin-top: 23px;
+			color: #888 !important;
+		}
+	}
+}
