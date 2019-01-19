@@ -10,7 +10,6 @@ define([
   'materialize',
   'js/app',
   'js/models/asset',
-  'js/models/event',
   'templates/compiledTemplates'
 ], function (
   exports,
@@ -22,7 +21,6 @@ define([
   materialize,
   app,
   asset,
-  event,
   compiledTemplates
 ) {
   'use strict';
@@ -52,6 +50,7 @@ define([
       var productDetails = this.model.toJSON();
       this.pointsRemaining = Math.round(Math.random() * 100);
       productDetails.points = this.pointsRemaining;
+      this.options.event.set({ points: this.pointsRemaining });
       this.el.innerHTML = compiledTemplates['templates/assetNotFound.hbs'](productDetails);
     },
     onAttach: function () {
@@ -85,7 +84,9 @@ define([
           ]
         }
       }];
+      var self = this;
       app.FTMobile.ambrosus.createAsset(productDetails).then(function (response) {
+        self.model.set({ assetId: response.data.assetId });
         // Response if successful
         app.FTMobile.AppRouter.navigate('success/', { trigger: true });
         console.log(response);
@@ -103,7 +104,9 @@ define([
     },
     render: function () {
       var productDetails = this.model.toJSON();
-      productDetails.points = this.options.event.get('points');
+      var pointsRemaining = Math.round(Math.random() * 100);
+      productDetails.points = pointsRemaining;
+      this.options.event.set({ points: pointsRemaining });
       this.el.innerHTML = compiledTemplates['templates/assetFound.hbs'](productDetails);
     },
     onAttach: function () {
@@ -112,16 +115,12 @@ define([
       }, 1000);
     },
     events: {
-      'click #confirm': 'confirmAsset',
       'click #cancel': 'cancel',
       'click #shipper': 'scanConfirmationCode',
       'click #receiver': 'scanConfirmationCode'
     },
     cancel: function () {
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
-    },
-    confirmAsset: function () {
-      $('.modal').modal({ onCloseStart: this.onCloseModal });
     },
     scanConfirmationCode: function (elemEvent) {
       app.FTMobile.AppRouter.navigate('confirmationCode/scan/' + elemEvent.target.id, { trigger: true });

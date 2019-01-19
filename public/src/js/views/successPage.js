@@ -10,6 +10,7 @@ define([
   'materialize',
   'js/app',
   'js/models/asset',
+  'js/models/header',
   'templates/compiledTemplates'
 ], function (
   exports,
@@ -21,6 +22,7 @@ define([
   materialize,
   app,
   asset,
+  header,
   compiledTemplates
 ) {
   'use strict';
@@ -34,18 +36,25 @@ define([
       });
     },
     onAttach: function () {
+      setTimeout(function () {
+        $('.modal').modal();
+      }, 1000);
     },
     events: {
       'click #goToHomePage': 'goToHomePage',
-      'click #handover': 'showHandover'
+      'click #handover': 'showHandover',
+      'click #shipper': 'scanConfirmationCode',
+      'click #receiver': 'scanConfirmationCode'
     },
     goToHomePage: function () {
       // TODO: set model default
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
     },
-    showHandover: function () {
+    scanConfirmationCode: function (elemEvent) {
+      app.FTMobile.AppRouter.navigate('confirmationCode/scan/' + elemEvent.target.id, { trigger: true });
     },
     onDestroy: function () {
+      header.headerModel.set({ currentPage: 'home' });
     }
   });
 });

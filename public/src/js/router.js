@@ -74,7 +74,7 @@ define([
         closeButton: false
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
-      app.FTMobile.rootView.showChildView('bodyRegion', new asset.AssestNotFound({ model: assetModel.assetModel }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new asset.AssestNotFound({ model: assetModel.assetModel, event: event.eventModel }));
     },
     showAssetFound: function () {
       headerModel.headerModel.set({
@@ -102,8 +102,13 @@ define([
         headerText: 'Confirmation Code',
         closeButton: false
       });
+      headerModel.headerModel.set({ currentPage: 'handover' });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
-      app.FTMobile.rootView.showChildView('bodyRegion', new qrCode.ScanConfirmationCode({ model: event.eventModel, doneBy: doneBy }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new qrCode.ScanConfirmationCode({
+        model: assetModel.assetModel,
+        event: event.eventModel,
+        doneBy: doneBy
+      }));
     },
     createEvent: function () {
       headerModel.headerModel.set({ headerText: 'Handover' });
@@ -123,9 +128,10 @@ define([
     successPage: function () {
       var headerText;
       var successMessage;
-      if (headerModel.headerModel.get('currentPage') === 'handover') {
+      var currentPage = headerModel.headerModel.get('currentPage');
+      if (currentPage === 'handover') {
         headerText = 'Handover successfully!';
-        successMessage = event.eventModel.get('name') +
+        successMessage = assetModel.assetModel.get('title') +
           ' is successfully handover to ' + event.eventModel.get('senderName');
       } else {
         headerText = 'Asset added successfully!';
@@ -133,7 +139,7 @@ define([
       }
       headerModel.headerModel.set({ headerText: headerText });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
-      app.FTMobile.rootView.showChildView('bodyRegion', new successPage.SuccessPage({ successText: successMessage }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new successPage.SuccessPage({ successText: successMessage, currentPage: currentPage }));
     },
     showAssetDetails: function (id) {
       var selectedAsset = asset.assetsCollection.filter(function (assetObj) {

@@ -85,11 +85,11 @@ define([
     getFormData: function () {
       var eventDetails = {
         name: this.model.get('title') || '',
-        // location: this.model.get('location'),
-        senderName: this.model.get('senderName'),
-        senderOrg: this.model.get('senderOrg'),
-        receiverName: this.model.get('receiverName'),
-        receiverOrg: this.model.get('receiverOrg'),
+        points: this.options.event.get('points'),
+        senderName: this.options.event.get('senderName'),
+        senderOrg: this.options.event.get('senderOrg'),
+        receiverName: this.options.event.get('receiverName'),
+        receiverOrg: this.options.event.get('receiverOrg'),
         device: device.uuid,
         type: 'ambrosus.asset.info',
         time: moment.utc().toISOString()
@@ -128,7 +128,7 @@ define([
         function (result) {
           // assetModel.assetModel.set({ productId: result.text });
           secondPartyDetail = JSON.parse(result.text);
-          if (self.doneBy === 'sender') {
+          if (self.doneBy === 'shipper') {
             senderName = localStorage.getItem('userName');
             senderOrg = localStorage.getItem('orgName');
             receiverName = secondPartyDetail.userName;

@@ -61,14 +61,20 @@ define([
     getEventSuccessCallback: function (transResponse, assetResponse, productId) {
       if (transResponse.data.resultCount === 0) {
         // Asset not found so update only the asset model
+        assetModel.assetModel.clear().set(assetModel.assetModel.defaults);
         assetModel.assetModel.set(assetResponse[0].items[0]);
         assetModel.assetModel.set({ ean: productId });
+        header.headerModel.set({ currentPage: 'addAsset' });
         app.FTMobile.AppRouter.navigate('assetNotFound/', { trigger: true });
       } else {
         // Asset found so save the data in asset and event model
+        assetModel.assetModel.clear().set(assetModel.assetModel.defaults);
         assetModel.assetModel.set(assetResponse[0].items[0]);
+        assetModel.assetModel.set({
+          assetId: transResponse.data.results[0].content.idData.assetId
+        });
+        event.eventModel.clear().set(event.eventModel.defaults);
         event.eventModel.set({
-          assetId: transResponse.data.results[0].content.idData.assetId,
           productId: transResponse.data.results[0].content.data[0].productId
         });
         header.headerModel.set({ currentPage: 'handover' });
