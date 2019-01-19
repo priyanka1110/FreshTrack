@@ -47,7 +47,7 @@ define([
     getFormData: function () {
       var eventDetails = {
         name: this.model.get('title'),
-        location: this.model.get('location'),
+        // location: this.model.get('location'),
         senderName: this.model.get('senderName'),
         senderOrg: this.model.get('senderOrg'),
         receiverName: this.model.get('receiverName'),

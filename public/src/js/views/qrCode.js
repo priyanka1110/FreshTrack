@@ -85,17 +85,18 @@ define([
       var senderOrg;
       var receiverName;
       var receiverOrg;
+      var secondPartyDetail = JSON.parse(result.text);
       cordova.plugins.barcodeScanner.scan(
         function (result) {
           // assetModel.assetModel.set({ productId: result.text });
           if (this.doneBy === 'sender') {
             senderName = localStorage.getItem('userName');
             senderOrg = localStorage.getItem('orgName');
-            receiverName = result.userName;
-            receiverOrg = result.orgName;
+            receiverName = secondPartyDetail.userName;
+            receiverOrg = secondPartyDetail.organizationName;
           } else {
-            senderName = result.userName;
-            senderOrg = result.orgName;
+            senderName = secondPartyDetail.userName;
+            senderOrg = secondPartyDetail.organizationName;
             receiverName = localStorage.getItem('userName');
             receiverOrg = localStorage.getItem('orgName');
           }
