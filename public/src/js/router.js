@@ -125,11 +125,11 @@ define([
       var successMessage;
       if (headerModel.headerModel.get('currentPage') === 'handover') {
         headerText = 'Handover successfully!';
-        successMessage = event.eventModel.get('name') +
-          ' is successfully handover to ' + event.eventModel.get('senderName');
+        successMessage = '<b>' + event.eventModel.get('name') + '</b>' +
+          ' is successfully handover to ' + '<b>' + event.eventModel.get('senderName') + '</b>';
       } else {
         headerText = 'Asset added!';
-        successMessage = assetModel.assetModel.get('title') + ' is successfully added!';
+        successMessage = '<b>' + assetModel.assetModel.get('title') + '</b>' + ' is successfully added!';
       }
       headerModel.headerModel.set({
         headerText: headerText,
