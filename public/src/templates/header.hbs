@@ -3,10 +3,12 @@
 	    <div class="nav-wrapper container">
 			<div id="logo-container" class="brand-logo left">
 			  <span class="header-width"> {{{headerText}}} </span>
-			  <span class="nav-right-icon right">
-			  	<i class="icon-qrcode" id="showConfirmationCode"></i>
-			  	<i class="icon-user2" id="editProfile"></i>
-			  </span>
+			  {{#if headerButtons}}
+				  <span class="nav-right-icon right">
+				  	<i class="icon-qrcode" id="showConfirmationCode"></i>
+				  	<i class="icon-user2" id="editProfile"></i>
+				  </span>
+			 {{/if}}
 			</div>
 			{{#if closeButton}}
 				<a id="close" class="header-icon backButton"><i class="icon-close"></i></a>

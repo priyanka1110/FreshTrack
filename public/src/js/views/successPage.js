@@ -33,7 +33,7 @@ define([
     render: function () {
       this.el.innerHTML = compiledTemplates['templates/successPage.hbs']({
         title: this.model.get('title'),
-        senderName: this.options.event.get('senderName'),
+        senderName: this.options.event.get('receiverName'),
         handover: this.options.currentPage === 'handover'
       });
     },
