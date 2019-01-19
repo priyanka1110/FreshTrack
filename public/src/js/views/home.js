@@ -73,7 +73,6 @@ define([
           assetId: transResponse.data.results[0].content.idData.assetId,
           productId: transResponse.data.results[0].content.data[0].productId
         });
-        console.log(result.text);
         header.headerModel.set({ currentPage: 'handover' });
         app.FTMobile.AppRouter.navigate('assetFound/', { trigger: true });
       }
