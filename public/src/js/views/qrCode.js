@@ -86,10 +86,11 @@ define([
       var receiverName;
       var receiverOrg;
       var secondPartyDetail = JSON.parse(result.text);
+      var self;
       cordova.plugins.barcodeScanner.scan(
         function (result) {
           // assetModel.assetModel.set({ productId: result.text });
-          if (this.doneBy === 'sender') {
+          if (self.doneBy === 'sender') {
             senderName = localStorage.getItem('userName');
             senderOrg = localStorage.getItem('orgName');
             receiverName = secondPartyDetail.userName;
