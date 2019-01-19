@@ -31,8 +31,11 @@ define([
     initialize: function () {
     },
     render: function () {
+      var handover = this.options.currentPage === 'handover' ? true : false;
       this.el.innerHTML = compiledTemplates['templates/successPage.hbs']({
-        successText: this.options.successText
+        title: this.model.get('title'),
+        senderName: this.model.get('senderName'),
+        handover: handover
       });
     },
     onAttach: function () {
