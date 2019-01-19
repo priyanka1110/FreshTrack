@@ -139,22 +139,27 @@ define([
     },
     successPage: function () {
       var headerText;
-      var successMessage;
+      // var successMessage;
       var currentPage = headerModel.headerModel.get('currentPage');
       if (currentPage === 'handover') {
         headerText = 'Handover successfully!';
-        successMessage = '<b>' + assetModel.assetModel.get('title') +
-          '</b> is successfully handover to <b>' + event.eventModel.get('senderName') + '</b>';
+        // successMessage = '<b>' + assetModel.assetModel.get('title') +
+        //   '</b> is successfully handover to <b>' + event.eventModel.get('senderName') + '</b>';
       } else {
         headerText = 'Asset added!';
-        successMessage = '<b>' + assetModel.assetModel.get('title') + '</b> is successfully added!';
+        // successMessage = '<b>' + assetModel.assetModel.get('title') +
+        // '</b> is successfully added!';
       }
       headerModel.headerModel.set({
         headerText: headerText,
         closeButton: true
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
-      app.FTMobile.rootView.showChildView('bodyRegion', new successPage.SuccessPage({ successText: successMessage, currentPage: currentPage }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new successPage.SuccessPage({
+        model: assetModel.assetModel,
+        currentPage: currentPage,
+        event: event.eventModel
+      }));
     },
     showAssetDetails: function (id) {
       var selectedAsset = asset.assetsCollection.filter(function (assetObj) {
