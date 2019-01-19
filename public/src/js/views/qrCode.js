@@ -70,7 +70,7 @@ define([
   });
   exports.ScanConfirmationCode = Marionette.View.extend({
     initialize: function () {
-      this.doneBy = this.options.doneBy
+      this.doneBy = this.options.doneBy;
     },
     render: function () {
       this.el.innerHTML = compiledTemplates['templates/scanConfirmationCode.hbs']();
@@ -81,6 +81,10 @@ define([
       'click #scan': 'scanCode'
     },
     scanCode: function () {
+      var senderName;
+      var senderOrg;
+      var receiverName;
+      var receiverOrg;
       cordova.plugins.barcodeScanner.scan(
         function (result) {
           // assetModel.assetModel.set({ productId: result.text });
@@ -99,7 +103,7 @@ define([
             senderName: senderName,
             senderOrg: senderOrg,
             receiverName: receiverName,
-            receiverorg: receiverorg
+            receiverOrg: receiverOrg
           });
           console.log(result.text);
           app.FTMobile.AppRouter.navigate('transactions/', { trigger: true });

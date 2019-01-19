@@ -104,7 +104,6 @@ define([
       this.el.innerHTML = compiledTemplates['templates/assetFound.hbs'](this.model.toJSON());
     },
     onAttach: function () {
-      var self = this;
       setTimeout(function () {
         $('.modal').modal();
       }, 2000);
@@ -112,8 +111,8 @@ define([
     events: {
       'click #confirm': 'confirmAsset',
       'click #cancel': 'cancel',
-      'click #shipper': 'confirmSecondParty',
-      'click #receiver': 'confirmSecondParty'
+      'click #shipper': 'scanConfirmationCode',
+      'click #receiver': 'scanConfirmationCode'
     },
     cancel: function () {
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
@@ -121,8 +120,8 @@ define([
     confirmAsset: function () {
       $('.modal').modal({ onCloseStart: this.onCloseModal });
     },
-    scanConfirmationCode: function (event) {
-      app.FTMobile.AppRouter.navigate('confirmationCode/scan/' + event.id, { trigger: true });
+    scanConfirmationCode: function (elemEvent) {
+      app.FTMobile.AppRouter.navigate('confirmationCode/scan/' + elemEvent.id, { trigger: true });
     },
     onDestroy: function () {
       // asset.assetModel.clear().set(asset.assetModel.defaults);
