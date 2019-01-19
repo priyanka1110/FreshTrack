@@ -55,6 +55,7 @@ define([
     },
     onDestroy: function () {
       header.headerModel.set({ currentPage: 'home' });
+      header.headerModel.set({ closeButton: false });
     }
   });
 });

@@ -159,6 +159,9 @@ define([
         }
       );
       // app.FTMobile.AppRouter.navigate('transactions/', { trigger: true });
+    },
+    onDestroy: function () {
+      header.headerModel.set({ closeButton: false });
     }
   });
 });

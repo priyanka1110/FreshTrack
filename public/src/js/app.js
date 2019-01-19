@@ -10,6 +10,7 @@ define([
   'underscore',
   'marionette',
   'backbone',
+  'materialize',
   'web3',
   'js/views/modalViews'
 ], function (exports,
@@ -18,6 +19,7 @@ define([
              _,
              Marionette,
              Backbone,
+             materialize,
              Web3,
              modalViews) {
   'use strict';
@@ -27,35 +29,19 @@ define([
 
   exports.checkIsLocationOn = function () {
     cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {
-      var locationServiceView;
-      var locationServiceModal = $('#modal').find('.locationServicie');
-
+      var elems;
+      var instance;
       if (!enabled) {
-        if (!locationServiceModal.length) {
-          $('#modal').modal({
-            dismissible: false,
-            complete: function () {
-              Backbone.pubSub.trigger('unbindModalEvents');
-            }
-          });
-          $('#modal').modal('open');
-          $('body').css('width', '100%');
-
-          locationServiceView = new modalViews.LocationServiceView();
-          locationServiceView.render();
-        }
-      } else if (locationServiceModal.length) {
-        Backbone.pubSub.trigger('unbindModalEvents');
+        elems = document.querySelectorAll('.modal');
+        M.Modal.init(elems);
+        instance = materialize.Modal.getInstance(elems[0]);
+        instance.open();
       }
     });
   };
-
-  thisModule.FTMobile.views = {};
-  thisModule.FTMobile.globals = {
-    actionType: null,
-    location: {}
-  };
-
+  $('#enableLocation').click(function () {
+    cordova.plugins.diagnostic.switchToLocationSettings();
+  });
   // application start event
   thisModule.FTMobile.on('start', function () {
     thisModule.FTMobile.ambrosus = new AmbrosusSDK({

@@ -10,6 +10,7 @@ define([
   'materialize',
   'js/app',
   'js/models/asset',
+  'js/models/header',
   'templates/compiledTemplates'
 ], function (
   exports,
@@ -21,6 +22,7 @@ define([
   materialize,
   app,
   asset,
+  header,
   compiledTemplates
 ) {
   'use strict';
@@ -96,6 +98,7 @@ define([
       });
     },
     onDestroy: function () {
+      header.headerModel.set({ closeButton: false });
       // headerModel.headerModel.clear().set(headerModel.headerModel.defaults);
     }
   });
@@ -126,6 +129,7 @@ define([
       app.FTMobile.AppRouter.navigate('confirmationCode/scan/' + elemEvent.target.id, { trigger: true });
     },
     onDestroy: function () {
+      header.headerModel.set({ closeButton: false });
       // asset.assetModel.clear().set(asset.assetModel.defaults);
     }
   });

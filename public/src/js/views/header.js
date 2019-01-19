@@ -6,6 +6,7 @@ define([
   'backbone',
   'materialize',
   'js/app',
+  'js/models/header',
   'templates/compiledTemplates'
 ], function (require,
              exports,
@@ -13,6 +14,7 @@ define([
              Backbone,
              materialize,
              app,
+             header,
              compiledTemplates) {
   'use strict';
 
@@ -27,6 +29,7 @@ define([
       'click #close': 'goToHomePage'
     },
     goToHomePage: function () {
+      header.headerModel.set({ closeButton: false });
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
     }
   });
