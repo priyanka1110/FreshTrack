@@ -121,7 +121,7 @@ define([
       $('.modal').modal({ onCloseStart: this.onCloseModal });
     },
     scanConfirmationCode: function (elemEvent) {
-      app.FTMobile.AppRouter.navigate('confirmationCode/scan/' + elemEvent.id, { trigger: true });
+      app.FTMobile.AppRouter.navigate('confirmationCode/scan/' + elemEvent.target.id, { trigger: true });
     },
     onDestroy: function () {
       // asset.assetModel.clear().set(asset.assetModel.defaults);
