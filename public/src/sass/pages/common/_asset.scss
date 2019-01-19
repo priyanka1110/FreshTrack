@@ -1,6 +1,7 @@
 .brand-logo {
-  font-size: 22px !important;
-  left: 16% !important;
+  font-size: 20px !important;
+  width: 100%;
+  margin-left: 25px;
 }
 
 .bg-add-product {
@@ -16,18 +17,17 @@
 }
 
 .home-card {
-    height: 150px;
-    margin-bottom: 10px !important;
-    margin-top: 10px !important;
-    margin-left: 10px !important;
-    margin-right: 10px !important;
+    margin-top: 30px !important;
     text-align: center;
+    margin-bottom: 20px;
 
-    .card-title {
-    	line-height: 110px !important;
-    	text-transform: uppercase;
-    	font-weight: 400;
-    	font-size: 22px !important;
+    h6 {
+    	font-size: 18px;
+    }
+
+    img {
+    	height: 30px;
+    	margin-bottom: 10px;
     }
 }
 
