@@ -44,3 +44,38 @@
     text-overflow: ellipsis;
     display: block;
 }
+
+.asset-found-page {
+	padding: 10px;
+	
+	.asset-message {
+		color: #000 !important;
+		margin-top: 5px;
+
+		h3 {
+			margin-bottom: 7px;
+		}
+	}
+
+	// .collection {
+	// 	margin: 30px -10px;
+ //    	border-top: 1px solid #ddd !important;	
+	// }
+
+	 .collection .collection-item.avatar {
+	 	min-height: 72px !important;
+	    padding-left: 20px !important;
+	 }
+
+	 .collection .collection-item.avatar .title {
+	    font-size: 16px;
+	    font-weight: 500;
+	    @extend %truncate;
+
+	 }
+
+	 .collection .collection-item.avatar p {
+	    font-size: 14px !important;
+	    @extend %truncate;
+	}
+}
