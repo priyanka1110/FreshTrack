@@ -1,9 +1,12 @@
 <div class="navbar-fixed">
-<nav>
-  <div class="nav-wrapper blue-grey">
-  	{{#if closeButton}}
-  		<button id="close">close</button>
-  	{{/if}}
-    <a href="#!" class="brand-logo">{{headerText}}</a>
-  </div>
-</nav>
+	<nav class="pink darken-3">
+	    <div class="nav-wrapper container">
+			<div id="logo-container" class="brand-logo left">
+			  <span class="truncate width3x"> {{{headerText}}} </span>
+			</div>
+			{{#if closeButton}}
+				<a id="close" class="header-icon backButton"><i class="icon-close"></i></a>
+			 {{/if}}
+	     </div>
+	</nav>
+</div>
