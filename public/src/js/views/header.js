@@ -1,4 +1,5 @@
 /* global define*/
+/* global cordova, device */
 define([
   'require',
   'exports',
@@ -26,11 +27,20 @@ define([
       });
     },
     events: {
+      'click #editProfile': 'editProfile',
+      'click #showConfirmationCode': 'showConfirmationCode',
       'click #close': 'goToHomePage'
     },
     goToHomePage: function () {
       header.headerModel.set({ closeButton: false });
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
+    },
+    editProfile: function () {
+      header.headerModel.set({ currentPage: 'profile' });
+      app.FTMobile.AppRouter.navigate('users/', { trigger: true });
+    },
+    showConfirmationCode: function () {
+      app.FTMobile.AppRouter.navigate('confirmationCode/show/', { trigger: true });
     }
   });
 });

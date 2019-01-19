@@ -32,7 +32,9 @@ define([
     },
     render: function () {
       this.el.innerHTML = compiledTemplates['templates/successPage.hbs']({
-        successText: this.options.successText
+        title: this.model.get('title'),
+        senderName: this.options.event.get('senderName'),
+        handover: this.options.currentPage === 'handover'
       });
     },
     onAttach: function () {

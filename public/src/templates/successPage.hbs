@@ -1,6 +1,10 @@
 <div id="{{productId}}" class='success-page assetList'> 
-	<p>{{successText}}</p>
-	<button class="btn black btn modal-trigger bg-indigo" href="#modal1" id="addAsset">Initiate Handover</button>
+	{{#if handover}}
+	<p><b>{{title}}</b> is successfully handover to <b>{{senderName}}</b></p>
+	{{else}}
+	<p><b>{{title}}</b> is successfully added!</p>
+	<button class="btn black btn modal-trigger" href="#modal1" id="addAsset">Initiate Handover</button>
+	{{/if}}
 	{{!-- <button class="btn btn-lg black" id='goToHomePage' name='close'> Take ME TO HOME </button> --}}
 </div>
 
