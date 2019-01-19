@@ -82,7 +82,7 @@ define([
         closeButton: false
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
-      app.FTMobile.rootView.showChildView('bodyRegion', new asset.AssestFound({ model: assetModel.assetModel }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new asset.AssestFound({ model: assetModel.assetModel, event: event.eventModel }));
     },
     createAsset: function () {
       headerModel.headerModel.set({ headerText: 'Add Asset' });

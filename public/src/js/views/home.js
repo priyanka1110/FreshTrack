@@ -60,11 +60,12 @@ define([
     },
     getEventSuccessCallback: function (transResponse, assetResponse, productId) {
       if (transResponse.data.resultCount === 0) {
+        // Asset not found so update only the asset model
         assetModel.assetModel.set(assetResponse[0].items[0]);
         assetModel.assetModel.set({ ean: productId });
         app.FTMobile.AppRouter.navigate('assetNotFound/', { trigger: true });
       } else {
-        // Response if successful
+        // Asset found so save the data in asset and event model
         assetModel.assetModel.set(assetResponse[0].items[0]);
         event.eventModel.set({
           assetId: transResponse.data.results[0].content.idData.assetId,

@@ -46,12 +46,13 @@ define([
   });
   exports.AssestNotFound = Marionette.View.extend({
     initialize: function () {
+      this.pointsRemaining = null;
     },
     render: function () {
-      this.el.innerHTML = compiledTemplates['templates/assetNotFound.hbs']({
-        productId: this.model.get('ean'),
-        productName: this.model.get('title')
-      });
+      var productDetails = this.model.toJSON();
+      this.pointsRemaining = Math.round(Math.random() * 100);
+      productDetails.points = this.pointsRemaining;
+      this.el.innerHTML = compiledTemplates['templates/assetNotFound.hbs'](productDetails);
     },
     onAttach: function () {
     },
@@ -67,7 +68,7 @@ define([
         orgName: localStorage.getItem('orgName'),
         productId: this.model.get('ean'),
         addedBy: localStorage.getItem('userName'),
-        points: Math.round(Math.random() * 100),
+        points: this.pointsRemaining,
         device: device.uuid,
         type: 'ambrosus.asset.info',
         time: moment.utc().toISOString(),
@@ -101,12 +102,14 @@ define([
     initialize: function () {
     },
     render: function () {
-      this.el.innerHTML = compiledTemplates['templates/assetFound.hbs'](this.model.toJSON());
+      var productDetails = this.model.toJSON();
+      productDetails.points = this.options.event.get('points');
+      this.el.innerHTML = compiledTemplates['templates/assetFound.hbs'](productDetails);
     },
     onAttach: function () {
       setTimeout(function () {
         $('.modal').modal();
-      }, 2000);
+      }, 1000);
     },
     events: {
       'click #confirm': 'confirmAsset',

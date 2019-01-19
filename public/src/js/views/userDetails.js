@@ -15,15 +15,36 @@ define([
   'use strict';
 
   exports.UserView = Marionette.View.extend({
+    initialize: function () {
+      this.buttonElement = this.$el.find('#orgName');
+    },
     render: function () {
       this.el.innerHTML = compiledTemplates['templates/user.hbs']({
         userName: localStorage.getItem('userName'),
         orgName: localStorage.getItem('orgName'),
-        email: localStorage.getItem('email')
+        email: localStorage.getItem('email'),
+        buttonState: this.buttonState
       });
     },
+    onAttach: function () {
+      this.buttonElement = this.$el.find('#save');
+    },
     events: {
-      'click #save': 'saveUserDeatils'
+      'click #save': 'saveUserDeatils',
+      'click #clear': 'clearUserDeatils',
+      'change #userName': 'enableDisableButton',
+      'change #orgName': 'enableDisableButton',
+      'change #email': 'enableDisableButton'
+    },
+    enableDisableButton: function () {
+      var userName = this.$el.find('#userName').val();
+      var orgName = this.$el.find('#orgName').val();
+      var email = this.$el.find('#email').val();
+      if (!userName || !orgName || !email) {
+        this.buttonElement.attr('disabled', 'disabled');
+      } else {
+        this.buttonElement.removeAttr('disabled');
+      }
     },
     saveUserDeatils: function () {
       var userName = this.$el.find('#userName').val();
@@ -35,6 +56,9 @@ define([
         localStorage.setItem('orgName', orgName);
         app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
       }
+    },
+    clearUserDeatils: function () {
+
     }
   });
 });
