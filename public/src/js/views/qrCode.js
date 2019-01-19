@@ -11,6 +11,7 @@ define([
   'qrcode',
   'js/app',
   'js/models/event',
+  'js/models/header',
   'templates/compiledTemplates'
 ], function (
   exports,
@@ -23,6 +24,7 @@ define([
   qrcode,
   app,
   event,
+  header,
   compiledTemplates
 ) {
   'use strict';
@@ -68,6 +70,9 @@ define([
         // navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
         successCallback();
       });
+    },
+    onDestroy: function () {
+      header.headerModel.set({ closeButton: false });
     }
   });
   exports.ScanConfirmationCode = Marionette.View.extend({
@@ -146,6 +151,7 @@ define([
             receiverOrg: receiverOrg
           });
           console.log(result.text);
+          header.headerModel.set({ currentPage: 'handover' });
           self.addEvent();
         },
         function (error) {

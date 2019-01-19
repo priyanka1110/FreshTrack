@@ -44,6 +44,7 @@ define([
       app.FTMobile.AppRouter.navigate('confirmationCode/show/', { trigger: true });
     },
     editProfile: function () {
+      header.headerModel.set({ currentPage: 'profile' });
       app.FTMobile.AppRouter.navigate('users/', { trigger: true });
     },
     createAsset: function () {

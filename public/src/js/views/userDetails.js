@@ -5,12 +5,14 @@ define([
   'marionette',
   'backbone',
   'js/app',
+  'js/models/header',
   'templates/compiledTemplates'
 ], function (require,
              exports,
              Marionette,
              Backbone,
              app,
+             header,
              compiledTemplates) {
   'use strict';
 
@@ -28,6 +30,7 @@ define([
     },
     onAttach: function () {
       this.buttonElement = this.$el.find('#save');
+      this.enableDisableButton();
     },
     events: {
       'click #save': 'saveUserDeatils',
@@ -58,7 +61,13 @@ define([
       }
     },
     clearUserDeatils: function () {
-
+      this.$el.find('#userName').val('');
+      this.$el.find('#orgName').val('');
+      this.$el.find('#email').val('');
+      this.enableDisableButton();
+    },
+    onDestroy: function () {
+      header.headerModel.set({ closeButton: false });
     }
   });
 });

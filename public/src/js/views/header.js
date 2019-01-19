@@ -4,11 +4,15 @@ define([
   'exports',
   'marionette',
   'backbone',
+  'materialize',
+  'js/app',
   'templates/compiledTemplates'
 ], function (require,
              exports,
              Marionette,
              Backbone,
+             materialize,
+             app,
              compiledTemplates) {
   'use strict';
 
@@ -18,6 +22,12 @@ define([
         headerText: this.model.get('headerText'),
         closeButton: this.model.get('closeButton')
       });
+    },
+    events: {
+      'click #close': 'goToHomePage'
+    },
+    goToHomePage: function () {
+      app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
     }
   });
 });
