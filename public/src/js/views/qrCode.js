@@ -68,4 +68,51 @@ define([
       });
     }
   });
+  exports.ScanConfirmationCode = Marionette.View.extend({
+    initialize: function () {
+      this.doneBy = this.options.doneBy;
+    },
+    render: function () {
+      this.el.innerHTML = compiledTemplates['templates/scanConfirmationCode.hbs']();
+    },
+    onAttach: function () {
+    },
+    events: {
+      'click #scan': 'scanCode'
+    },
+    scanCode: function () {
+      var senderName;
+      var senderOrg;
+      var receiverName;
+      var receiverOrg;
+      cordova.plugins.barcodeScanner.scan(
+        function (result) {
+          // assetModel.assetModel.set({ productId: result.text });
+          if (this.doneBy === 'sender') {
+            senderName = localStorage.getItem('userName');
+            senderOrg = localStorage.getItem('orgName');
+            receiverName = result.userName;
+            receiverOrg = result.orgName;
+          } else {
+            senderName = result.userName;
+            senderOrg = result.orgName;
+            receiverName = localStorage.getItem('userName');
+            receiverOrg = localStorage.getItem('orgName');
+          }
+          event.eventModel.set({
+            senderName: senderName,
+            senderOrg: senderOrg,
+            receiverName: receiverName,
+            receiverOrg: receiverOrg
+          });
+          console.log(result.text);
+          app.FTMobile.AppRouter.navigate('transactions/', { trigger: true });
+        },
+        function (error) {
+          console.log('Error in bar code scanner ', error);
+        }
+      );
+      // app.FTMobile.AppRouter.navigate('transactions/', { trigger: true });
+    }
+  });
 });

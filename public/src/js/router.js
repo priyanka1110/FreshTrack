@@ -45,11 +45,11 @@ define([
     routes: {
       'homePage/': 'homePage',
       'createAsset/': 'createAsset',
-      'transactions/': 'createEvent',
+      'transactions/:doneBy': 'createEvent',
       'assetNotFound/': 'showAssetNotFound',
       'assetFound/': 'showAssetFound',
       'confimationCode/show/': 'showConfimationCode',
-      'confimationCode/scan/': 'scanConfimationCode',
+      'confimationCode/scan/:doneBy': 'scanConfimationCode',
       'assets/': 'showAsset',
       'assetDetails/:id': 'showAssetDetails',
       'success/': 'successPage',
@@ -97,8 +97,13 @@ define([
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new qrCode.ConfirmationCode({ model: event.eventModel }));
     },
-    scanConfimationCode: function () {
-
+    scanConfimationCode: function (doneBy) {
+      headerModel.headerModel.set({
+        headerText: 'Confirmation Code',
+        closeButton: false
+      });
+      app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new qrCode.ScanConfirmationCode({ model: event.eventModel, doneBy: doneBy }));
     },
     createEvent: function () {
       headerModel.headerModel.set({ headerText: 'Handover' });
@@ -110,7 +115,8 @@ define([
     },
     showAsset: function () {
       var events = event.eventCollection.toJSON();
-      headerModel.headerModel.set({ headerText: events[0].content.data[0].name });
+      var headerText = events[0] ? events[0].content.data[0].name : 'No transactions found';
+      headerModel.headerModel.set({ headerText: headerText });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new getAsset.Assets({ model: event.eventCollection }));
     },

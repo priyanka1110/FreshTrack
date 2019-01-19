@@ -30,11 +30,16 @@ define([
     },
     render: function () {
       var events = event.eventCollection.toJSON();
-      var productDetails = _.last(events).content.data[0];
-      this.el.innerHTML = compiledTemplates['templates/assets.hbs']({
-        productDetails: productDetails,
-        events: events
-      });
+      var productDetails;
+      if (events[0]) {
+        productDetails = _.last(events).content.data[0];
+        this.el.innerHTML = compiledTemplates['templates/transactions.hbs']({
+          productDetails: productDetails,
+          events: events
+        });
+      } else {
+        this.el.innerHTML = compiledTemplates['templates/noTransactions.hbs']();
+      }
     },
     onAttach: function () {
     },
