@@ -110,7 +110,8 @@ define([
     },
     showAsset: function () {
       var events = event.eventCollection.toJSON();
-      headerModel.headerModel.set({ headerText: events[0].content.data[0].name });
+      var headerText = events[0] ? events[0].content.data[0].name : 'No transactions found';
+      headerModel.headerModel.set({ headerText: headerText });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new getAsset.Assets({ model: event.eventCollection }));
     },
