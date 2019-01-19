@@ -107,6 +107,13 @@ define([
       this.el.innerHTML = compiledTemplates['templates/assetFound.hbs'](this.model.toJSON());
     },
     onAttach: function () {
+      var self = this;
+      var onCloseModal = function () {
+        self.confirmSecondParty();
+      };
+      setTimeout(function () {
+        $('.modal').modal({ onCloseStart: onCloseModal });
+      }, 2000);
     },
     events: {
       'click #confirm': 'confirmAsset',
@@ -116,6 +123,9 @@ define([
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
     },
     confirmAsset: function () {
+      $('.modal').modal({ onCloseStart: this.onCloseModal });
+    },
+    confirmSecondParty: function () {
       cordova.plugins.barcodeScanner.scan(
         function (result) {
           // assetModel.assetModel.set({ productId: result.text });
