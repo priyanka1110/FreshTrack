@@ -45,7 +45,8 @@ define([
         addedBy: localStorage.getItem('userName'),
         points: this.model.get('points'),
         type: 'ambrosus.asset.info',
-        time: moment.utc().toISOString()
+        time: moment.utc().toISOString(),
+        name: this.model.get('title')
       };
       asset.assetModel.set(productDetails);
       return productDetails;
@@ -96,7 +97,7 @@ define([
       app.FTMobile.AppRouter.navigate('createAsset/', { trigger: true });
     },
     onDestroy: function () {
-      // asset.assetModel.clear().set(asset.assetModel.defaults);
+      // headerModel.headerModel.clear().set(headerModel.headerModel.defaults);
     }
   });
   exports.AssestFound = Marionette.View.extend({

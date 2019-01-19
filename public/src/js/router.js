@@ -71,7 +71,7 @@ define([
     showAssetNotFound: function () {
       headerModel.headerModel.set({
         headerText: 'Asset does not exist',
-        closeButton: true
+        closeButton: false
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new asset.AssestNotFound({ model: assetModel.assetModel }));
@@ -79,7 +79,7 @@ define([
     showAssetFound: function () {
       headerModel.headerModel.set({
         headerText: 'Asset exists',
-        closeButton: true
+        closeButton: false
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new asset.AssestFound({ model: assetModel.assetModel }));
@@ -92,7 +92,7 @@ define([
     showConfimationCode: function () {
       headerModel.headerModel.set({
         headerText: 'Confirmation Code',
-        closeButton: true
+        closeButton: false
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new qrCode.ConfirmationCode({ model: event.eventModel }));
@@ -123,7 +123,7 @@ define([
           ' is successfully handover to ' + event.eventModel.get('senderName');
       } else {
         headerText = 'Product Added!';
-        successMessage = asset.assetModel.get('name') + ' is successfully added!';
+        successMessage = assetModel.assetModel.get('title') + ' is successfully added!';
       }
       headerModel.headerModel.set({ headerText: headerText });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
