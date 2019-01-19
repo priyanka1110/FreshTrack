@@ -25,13 +25,25 @@ define([
     },
     bindEvents: function () {
       document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+      document.addEventListener('resume', (function () {
+        this.requestCamera();
+      }).bind(this), false);
     },
     onDeviceReady: function () {
+      this.requestCamera();
+
       app.FTMobile.rootView = new rootView.RootView();
       app.FTMobile.rootView.render();
       app.FTMobile.AppRouter = new router.Router();
       Backbone.history.start();
       app.FTMobile.start();
+    },
+    requestCamera: function () {
+      cordova.plugins.diagnostic.requestCameraAuthorization(function (status) {
+        console.log('Authorization request for camera use was ' + (status === cordova.plugins.diagnostic.permissionStatus.GRANTED ? 'granted' : 'denied'));
+      }, function (error) {
+        console.error(error);
+      });
     }
   };
 
