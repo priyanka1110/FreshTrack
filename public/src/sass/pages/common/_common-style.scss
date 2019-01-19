@@ -149,3 +149,16 @@ textarea.materialize-textarea.valid:focus, .select-wrapper.valid>input.select-dr
     -webkit-box-shadow: 0 1px 0 0  #000 !important;
     box-shadow: 0 1px 0 0  #000 !important;
 }
+
+
+.modal {
+  bottom: auto;
+    left: 50% !important;
+    max-height: calc(100% - 100px);
+    right: auto;
+    top: 50% !important;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
