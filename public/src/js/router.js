@@ -128,7 +128,7 @@ define([
         successMessage = event.eventModel.get('name') +
           ' is successfully handover to ' + event.eventModel.get('senderName');
       } else {
-        headerText = 'Product Added!';
+        headerText = 'Asset added successfully!';
         successMessage = assetModel.assetModel.get('title') + ' is successfully added!';
       }
       headerModel.headerModel.set({ headerText: headerText });
