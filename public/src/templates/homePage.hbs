@@ -1,4 +1,51 @@
-<div class="row col s12" style="display:none">
+<div class="row col s12 transaction-page">
+	<ul class="collection">
+		<li class="collection-item avatar">
+	      	<span class="title">{{PointsRemaning}}</span>
+	      	<p>Points Remaining</p>
+	    </li>
+
+	    <li class="collection-item avatar">
+	      	<span class="title">{{title}}</span>
+	      	<p>Prdouct Name</p>
+	    </li>
+
+	    <li class="collection-item avatar">
+	      	<span class="title">{{title}}</span>
+	      	<p>Prdouct ID</p>
+	    </li>
+
+	   	<li class="collection-item avatar">
+	      	<span class="title">{{title}}</span>
+	      	<p>Brand</p>
+	    </li>
+
+	    <li class="collection-item avatar">
+	      	<span class="title">{{title}}</span>
+	      	<p>Description</p>
+	    </li>
+  	</ul>
+
+  	<div class="button-container">  
+  	 	<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Confirm</a>		
+		<button class="btn black" id="addAsset">Initiate Handover</button>
+    	<button class="btn orange" id="cancle">Cancel</button>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+	<div class="modal-content">
+		Are you a reciever or shipper? 
+	</div>
+	<div class="modal-footer">
+	  <a class="modal-close btn-flat">Shipper</a>
+	  <a class="modal-close btn-flat">Sender</a>
+	</div>
+</div>
+
+
+<div class="row col s12">
 
     <div class="card home-card bg-add-product" id="addTransaction">
         <div class="card-content white-text">
