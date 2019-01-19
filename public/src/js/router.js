@@ -45,7 +45,7 @@ define([
     routes: {
       'homePage/': 'homePage',
       'createAsset/': 'createAsset',
-      'transactions/': 'createEvent',
+      'transactions/:doneBy': 'createEvent',
       'assetNotFound/': 'showAssetNotFound',
       'assetFound/': 'showAssetFound',
       'confirmationCode/show/': 'showConfimationCode',
@@ -56,23 +56,14 @@ define([
       'users/': 'profile'
     },
     homePage: function () {
-      headerModel.headerModel.set({
-        headerText: 'Home',
-        closeButton: false
-      });
+      headerModel.headerModel.set({ headerText: 'Smart Perishable' });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new homeView.HomeView());
     },
     profile: function () {
-      var enableCloseButton;
-      if (headerModel.headerModel.get('currentPage') === 'profile') {
-        enableCloseButton = true;
-      } else {
-        enableCloseButton = true;
-      }
       headerModel.headerModel.set({
         headerText: 'Profile',
-        closeButton: enableCloseButton
+        closeButton: false
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new userDetails.UserView());
@@ -83,7 +74,7 @@ define([
         closeButton: true
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
-      app.FTMobile.rootView.showChildView('bodyRegion', new asset.AssestNotFound({ model: assetModel.assetModel, event: event.eventModel }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new asset.AssestNotFound({ model: assetModel.assetModel }));
     },
     showAssetFound: function () {
       headerModel.headerModel.set({
@@ -91,7 +82,7 @@ define([
         closeButton: true
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
-      app.FTMobile.rootView.showChildView('bodyRegion', new asset.AssestFound({ model: assetModel.assetModel, event: event.eventModel }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new asset.AssestFound({ model: assetModel.assetModel }));
     },
     createAsset: function () {
       headerModel.headerModel.set({ headerText: 'Add Asset' });
@@ -101,7 +92,7 @@ define([
     showConfimationCode: function () {
       headerModel.headerModel.set({
         headerText: 'Confirmation Code',
-        closeButton: true
+        closeButton: false
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new qrCode.ConfirmationCode({ model: event.eventModel }));
@@ -111,13 +102,8 @@ define([
         headerText: 'Handover',
         closeButton: true
       });
-      headerModel.headerModel.set({ currentPage: 'handover' });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
-      app.FTMobile.rootView.showChildView('bodyRegion', new qrCode.ScanConfirmationCode({
-        model: assetModel.assetModel,
-        event: event.eventModel,
-        doneBy: doneBy
-      }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new qrCode.ScanConfirmationCode({ model: event.eventModel, doneBy: doneBy }));
     },
     createEvent: function () {
       headerModel.headerModel.set({ headerText: 'Handover' });
@@ -130,20 +116,16 @@ define([
     showAsset: function () {
       var events = event.eventCollection.toJSON();
       var headerText = events[0] ? events[0].content.data[0].name : 'No transactions found';
-      headerModel.headerModel.set({
-        headerText: headerText,
-        closeButton: true
-      });
+      headerModel.headerModel.set({ headerText: headerText });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new getAsset.Assets({ model: event.eventCollection }));
     },
     successPage: function () {
       var headerText;
       var successMessage;
-      var currentPage = headerModel.headerModel.get('currentPage');
-      if (currentPage === 'handover') {
+      if (headerModel.headerModel.get('currentPage') === 'handover') {
         headerText = 'Handover successfully!';
-        successMessage = assetModel.assetModel.get('title') +
+        successMessage = event.eventModel.get('name') +
           ' is successfully handover to ' + event.eventModel.get('senderName');
       } else {
         headerText = 'Asset added!';
@@ -154,7 +136,7 @@ define([
         closeButton: true
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
-      app.FTMobile.rootView.showChildView('bodyRegion', new successPage.SuccessPage({ successText: successMessage, currentPage: currentPage }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new successPage.SuccessPage({ successText: successMessage }));
     },
     showAssetDetails: function (id) {
       var selectedAsset = asset.assetsCollection.filter(function (assetObj) {
