@@ -38,14 +38,14 @@ define([
         userName: localStorage.getItem('userName'),
         organizationName: localStorage.getItem('orgName')
       };
-
-      this.getLocationData(function (position) {
-        qrCodeData.location.latitude = position.coords.latitude;
-        qrCodeData.location.longitude = position.coords.longitude;
+      var self = this;
+      this.getLocationData(function () {
+        // qrCodeData.location.latitude = position.coords.latitude;
+        // qrCodeData.location.longitude = position.coords.longitude;
         qrCodeData.confirmtationCodeGeneratedAt = moment().format();
-        $(this.el).find('#confirmationCode').html('');
+        $(self.el).find('#confirmationCode').html('');
 
-        $(this.el).find('#confirmationCode').qrcode({
+        $(self.el).find('#confirmationCode').qrcode({
           text: JSON.stringify(qrCodeData)
         });
       }, function (error) {
@@ -61,9 +61,10 @@ define([
         }
       });
     },
-    getLocationData: function (successCallback, errorCallback) {
+    getLocationData: function (successCallback) {
       this.checkLocationServiceStatus(function () {
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        // navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        successCallback();
       });
     }
   });
