@@ -35,17 +35,8 @@ define([
       this.el.innerHTML = compiledTemplates['templates/homePage.hbs']();
     },
     events: {
-      'click #editProfile': 'editProfile',
       'click #getAsset': 'showAssets',
-      'click #addTransaction': 'createTransaction',
-      'click #showConfirmationCode': 'showConfirmationCode'
-    },
-    showConfirmationCode: function () {
-      app.FTMobile.AppRouter.navigate('confirmationCode/show/', { trigger: true });
-    },
-    editProfile: function () {
-      header.headerModel.set({ currentPage: 'profile' });
-      app.FTMobile.AppRouter.navigate('users/', { trigger: true });
+      'click #addTransaction': 'createTransaction'
     },
     createAsset: function () {
       cordova.plugins.barcodeScanner.scan(
