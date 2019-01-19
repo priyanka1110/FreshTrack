@@ -1,16 +1,17 @@
 <div id="{{productId}}" class='success-page assetList'> 
 	<p>{{successText}}</p>
-	<button class="btn black btn modal-trigger" href="#modal1" id="addAsset">Initiate Handover</button>
-	<button class="btn btn-lg black" id='goToHomePage' name='close'> Take ME TO HOME </button>
+	<button class="btn black btn modal-trigger bg-indigo" href="#modal1" id="addAsset">Initiate Handover</button>
+	{{!-- <button class="btn btn-lg black" id='goToHomePage' name='close'> Take ME TO HOME </button> --}}
 </div>
 
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
 	<div class="modal-content">
-		Are you a receiver or shipper? 
+		<h3>Please confirm</h3>
+  		<p>Are you a receiver or a shipper?</p>
 	</div>
 	<div class="modal-footer">
-	  <a class="modal-close btn-flat" id="receiver">Receiver</a>
-	  <a class="modal-close btn-flat" id="shipper">Shipper</a>
+	  <a class="modal-close btn-flat text-light-blue" id="receiver">Receiver</a>
+	  <a class="modal-close btn-flat text-light-blue" id="shipper">Shipper</a>
 	</div>
 </div>
