@@ -10,6 +10,7 @@ define([
   'materialize',
   'js/app',
   'js/models/asset',
+  'js/models/event',
   'templates/compiledTemplates'
 ], function (
   exports,
@@ -21,6 +22,7 @@ define([
   materialize,
   app,
   asset,
+  event,
   compiledTemplates
 ) {
   'use strict';
@@ -37,40 +39,6 @@ define([
     events: {
       'click #addProduct': 'addProduct',
       'click #cancel': 'cancel'
-    },
-    getFormData: function () {
-      var productDetails = {
-        orgName: localStorage.getItem('orgName'),
-        productId: this.model.get('ean'),
-        addedBy: localStorage.getItem('userName'),
-        points: this.model.get('points'),
-        device: device.uuid,
-        type: 'ambrosus.asset.info',
-        time: moment.utc().toISOString(),
-        name: this.model.get('title')
-      };
-      asset.assetModel.set(productDetails);
-      return productDetails;
-    },
-    cancel: function () {
-      app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
-    },
-    addProduct: function () {
-      var productDetails = [{
-        content: {
-          data: [
-            this.getFormData()
-          ]
-        }
-      }];
-      app.FTMobile.ambrosus.createAsset(productDetails).then(function (response) {
-        // Response if successful
-        app.FTMobile.AppRouter.navigate('success/', { trigger: true });
-        console.log(response);
-      }).catch(function (error) {
-        // Error if error
-        console.log(error);
-      });
     },
     onDestroy: function () {
       asset.assetModel.clear().set(asset.assetModel.defaults);
@@ -94,8 +62,36 @@ define([
     cancel: function () {
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
     },
+    getFormData: function () {
+      var productDetails = {
+        orgName: localStorage.getItem('orgName'),
+        productId: this.model.get('ean'),
+        addedBy: localStorage.getItem('userName'),
+        points: Math.round(Math.random() * 100),
+        device: device.uuid,
+        type: 'ambrosus.asset.info',
+        time: moment.utc().toISOString(),
+        name: this.model.get('title')
+      };
+      asset.assetModel.set(productDetails);
+      return productDetails;
+    },
     addAsset: function () {
-      app.FTMobile.AppRouter.navigate('createAsset/', { trigger: true });
+      var productDetails = [{
+        content: {
+          data: [
+            this.getFormData()
+          ]
+        }
+      }];
+      app.FTMobile.ambrosus.createAsset(productDetails).then(function (response) {
+        // Response if successful
+        app.FTMobile.AppRouter.navigate('success/', { trigger: true });
+        console.log(response);
+      }).catch(function (error) {
+        // Error if error
+        console.log(error);
+      });
     },
     onDestroy: function () {
       // headerModel.headerModel.clear().set(headerModel.headerModel.defaults);
@@ -109,16 +105,15 @@ define([
     },
     onAttach: function () {
       var self = this;
-      var onCloseModal = function () {
-        self.confirmSecondParty();
-      };
       setTimeout(function () {
-        $('.modal').modal({ onCloseStart: onCloseModal });
+        $('.modal').modal();
       }, 2000);
     },
     events: {
       'click #confirm': 'confirmAsset',
-      'click #cancel': 'cancel'
+      'click #cancel': 'cancel',
+      'click #shipper': 'confirmSecondParty',
+      'click #receiver': 'confirmSecondParty'
     },
     cancel: function () {
       app.FTMobile.AppRouter.navigate('homePage/', { trigger: true });
@@ -126,18 +121,8 @@ define([
     confirmAsset: function () {
       $('.modal').modal({ onCloseStart: this.onCloseModal });
     },
-    confirmSecondParty: function () {
-      cordova.plugins.barcodeScanner.scan(
-        function (result) {
-          // assetModel.assetModel.set({ productId: result.text });
-          console.log(result.text);
-          app.FTMobile.AppRouter.navigate('transactions/', { trigger: true });
-        },
-        function (error) {
-          console.log('Error in bar code scanner ', error);
-        }
-      );
-      // app.FTMobile.AppRouter.navigate('transactions/', { trigger: true });
+    scanConfirmationCode: function (event) {
+      app.FTMobile.AppRouter.navigate('confirmationCode/scan/' + event.id, { trigger: true });
     },
     onDestroy: function () {
       // asset.assetModel.clear().set(asset.assetModel.defaults);
