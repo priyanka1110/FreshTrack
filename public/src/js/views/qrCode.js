@@ -43,18 +43,18 @@ define([
         organizationName: localStorage.getItem('orgName')
       };
       var self = this;
-      this.getLocationData(function (position) {
-        qrCodeData.location.latitude = position.coords.latitude;
-        qrCodeData.location.longitude = position.coords.longitude;
-        qrCodeData.confirmtationCodeGeneratedAt = moment().format();
-        $(self.el).find('#confirmationCode').html('');
+      // this.getLocationData(function (position) {
+      //   qrCodeData.location.latitude = position.coords.latitude;
+      //   qrCodeData.location.longitude = position.coords.longitude;
+      qrCodeData.confirmtationCodeGeneratedAt = moment().format();
+      $(self.el).find('#confirmationCode').html('');
 
-        $(self.el).find('#confirmationCode').qrcode({
-          text: JSON.stringify(qrCodeData)
-        });
-      }, function (error) {
-        console.log(error);
+      $(self.el).find('#confirmationCode').qrcode({
+        text: JSON.stringify(qrCodeData)
       });
+      // }, function (error) {
+      //   console.log(error);
+      // });
     },
     checkLocationServiceStatus: function (successCallback) {
       cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {

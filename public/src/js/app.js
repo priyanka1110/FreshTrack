@@ -57,7 +57,7 @@ define([
       thisModule.FTMobile.AppRouter.navigate('users/', { trigger: true });
     }
 
-    thisModule.checkIsLocationOn();
+    // thisModule.checkIsLocationOn();
 
   });
 });
