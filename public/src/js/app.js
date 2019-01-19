@@ -10,20 +10,51 @@ define([
   'underscore',
   'marionette',
   'backbone',
-  'web3'
+  'web3',
+  'js/views/modalViews'
 ], function (exports,
              $,
              moment,
              _,
              Marionette,
              Backbone,
-             Web3) {
+             Web3,
+             modalViews) {
   'use strict';
 
   var thisModule = this;
   exports.FTMobile = new Backbone.Marionette.Application();
 
+  exports.checkIsLocationOn = function () {
+    cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {
+      var locationServiceView;
+      var locationServiceModal = $('#modal').find('.locationServicie');
+
+      if (!enabled) {
+        if (!locationServiceModal.length) {
+          $('#modal').modal({
+            dismissible: false,
+            complete: function () {
+              Backbone.pubSub.trigger('unbindModalEvents');
+            }
+          });
+          $('#modal').modal('open');
+          $('body').css('width', '100%');
+
+          locationServiceView = new modalViews.LocationServiceView();
+          locationServiceView.render();
+        }
+      } else if (locationServiceModal.length) {
+        Backbone.pubSub.trigger('unbindModalEvents');
+      }
+    });
+  };
+
   thisModule.FTMobile.views = {};
+  thisModule.FTMobile.globals = {
+    actionType: null,
+    location: {}
+  };
 
   // application start event
   thisModule.FTMobile.on('start', function () {
@@ -39,5 +70,8 @@ define([
     } else {
       thisModule.FTMobile.AppRouter.navigate('users/', { trigger: true });
     }
+
+    thisModule.checkIsLocationOn();
+
   });
 });
