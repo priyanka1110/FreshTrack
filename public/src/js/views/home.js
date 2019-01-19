@@ -72,6 +72,7 @@ define([
         header.headerModel.set({ currentPage: 'handover' });
         app.FTMobile.AppRouter.navigate('assetFound/', { trigger: true });
       }
+      $('.preloader-wrapper').addClass('hide');
     },
     createTransaction: function () {
       var self = this;
@@ -79,6 +80,7 @@ define([
       var deffereds = [];
       cordova.plugins.barcodeScanner.scan(
         function (result) {
+          $('.preloader-wrapper').removeClass('hide');
           deffereds.push(app.FTMobile.ambrosus.getEvents({ 'data[productId]': result.text }));
           // remove the proxy if you can handle CORS
           deffereds.push($.ajax({
@@ -103,10 +105,12 @@ define([
       );
     },
     showAssets: function () {
+      $('.preloader-wrapper').removeClass('hide');
       app.FTMobile.ambrosus.getEvents({ 'data[device]': device.uuid }).then(function (response) {
         response.data.results.forEach(function (eventObj) {
           event.eventCollection.add(eventObj);
         });
+        $('.preloader-wrapper').addClass('hide');
         app.FTMobile.AppRouter.navigate('assets/', { trigger: true });
       }).catch(function (error) {
         // Error if error
