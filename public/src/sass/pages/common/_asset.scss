@@ -119,3 +119,52 @@
     right: auto;
     top: 50%;
 }
+
+
+
+
+.handover-confirmation-code-page {
+	bottom: auto;
+    left: 50% !important;
+    max-height: calc(100% - 100px);
+    position: fixed;
+    right: auto;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+  	margin-top: 30px;
+  	padding: 0 10px;
+
+  .loading-text {
+    font-size: 18px;
+    padding-bottom: 100px;
+ 	}
+
+  canvas {
+    margin-bottom: 50px;
+    width: 90%;
+	}
+
+  p {
+    margin-top: 15px;
+	}
+
+  .tip {
+    font-size: 20px;
+
+    .fa-lightbulb-o {
+      padding-right: 5px;
+		}
+	}
+}
+
+
+.header-icon {
+	i {
+		font-size: 18px;
+		line-height: 56px;
+	}
+}

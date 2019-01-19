@@ -26,7 +26,6 @@
         <icon density="hdpi" src="www/img/splash/hdpi.png" />
         <icon density="xhdpi" src="www/img/splash/xhdpi.png" />
     </platform>
-    <engine name="android" spec="~6.1.0" />
     <plugin name="cordova-plugin-websql" spec="~0.0.10" />
     <plugin name="phonegap-nfc" spec="~0.6.5" />
     <plugin name="cordova-plugin-device" spec="~1.1.4" />
@@ -45,4 +44,5 @@
         <variable name="ANDROID_SUPPORT_VERSION" value="26.+" />
     </plugin>
     <plugin name="cordova-plugin-x-toast" spec="https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin" />
+    <engine name="android" spec="~6.1.0" />
 </widget>
