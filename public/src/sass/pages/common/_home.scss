@@ -42,8 +42,8 @@
 
 
 .header-width {
-	display: inline-block;
-    width: 230px;
+	 display: inline-block;
+    width: 230px !important;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
