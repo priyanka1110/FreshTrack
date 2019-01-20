@@ -118,8 +118,10 @@ define([
           ]
         }
       };
+      $('.preloader-wrapper').removeClass('hide');
       app.FTMobile.ambrosus.createEvent(this.model.get('assetId'), eventDetails).then(function (response) {
         // Response if successful
+        $('.preloader-wrapper').addClass('hide');
         app.FTMobile.AppRouter.navigate('success/', { trigger: true });
         console.log(response);
       }).catch(function (error) {
