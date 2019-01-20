@@ -1,6 +1,6 @@
 <div id="{{productId}}" class='success-page assetList'> 
 	{{#if handover}}
-	<p><b>{{title}}</b> is successfully handover to <b>{{senderName}}</b></p>
+	<p><b>{{title}}</b> is successfully handovered to <b>{{senderName}}</b></p>
 	{{else}}
 	<p><b>{{title}}</b> is successfully added!</p>
 	<button class="btn black btn modal-trigger" href="#modal1" id="addAsset">Initiate Handover</button>
@@ -11,10 +11,10 @@
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
 	<div class="modal-content">
-  		<p>Are you a receiver or a shipper?</p>
+  		<p>Are you a shipper or a receiver?</p>
 	</div>
 	<div class="modal-footer">
-	  <a class="modal-close btn-flat text-light-blue" id="receiver">Receiver</a>
-	  <a class="modal-close btn-flat text-light-blue" id="shipper">Shipper</a>
+	  <a class="modal-close btn-flat blue-text" id="shipper">Shipper</a>
+	  <a class="modal-close btn-flat blue-text" id="receiver">Receiver</a>
 	</div>
 </div>

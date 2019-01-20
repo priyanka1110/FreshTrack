@@ -152,7 +152,7 @@ define([
     },
     showAsset: function () {
       var events = event.eventCollection.toJSON();
-      var headerText = events[0] ? 'Transactions' : 'No transactions found';
+      var headerText = events[0] ? 'Transactions' : 'Transactions';
       headerModel.headerModel.set({
         headerText: headerText,
         closeButton: true,
@@ -166,7 +166,7 @@ define([
       // var successMessage;
       var currentPage = headerModel.headerModel.get('currentPage');
       if (currentPage === 'handover') {
-        headerText = 'Handover successfully!';
+        headerText = 'Handover successful!';
         // successMessage = '<b>' + assetModel.assetModel.get('title') +
         //   '</b> is successfully handover to <b>' + event.eventModel.get('senderName') + '</b>';
       } else {
