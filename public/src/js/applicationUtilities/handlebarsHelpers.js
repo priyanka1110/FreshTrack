@@ -21,5 +21,8 @@ define([
   Handlebars.registerHelper('humanizeTime', function (isoString) {
     return moment(isoString).format("MMM Do YY");;
   });
+  Handlebars.registerHelper('formatEventType', function (eventType) {
+    return eventType === 'addAsset' ? 'Asset' : 'Handover';
+  });
 
 });
