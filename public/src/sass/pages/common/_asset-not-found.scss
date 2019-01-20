@@ -23,6 +23,7 @@
 	 .collection .collection-item.avatar .title {
 	    font-size: 16px;
 	    font-weight: 500;
+	    height: 30px;
 	    @extend %truncate;
 
 	 }
@@ -75,6 +76,7 @@
 	    font-size: 16px;
 	    font-weight: 500;
 	    @extend %truncate;
+	    height: 30px;
 
 	 }
 

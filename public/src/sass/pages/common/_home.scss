@@ -20,7 +20,7 @@
 
   	img {
   		width: 170px;
-  		margin-bottom: 30px;
+  		margin-bottom: 15px;
   	}
 }
 
@@ -54,7 +54,7 @@
 }
 
 .transactions-btn {
-	margin-top: 20px;
+	margin-top: 30px;
 	font-weight: bold;
 	color: #e76f51 !important;
 
@@ -68,3 +68,14 @@
   background-color: #264653 !important;
 }
 
+.no-transaction {
+  text-align: center;
+  padding: 0 16px;
+
+  h3 {
+    font-size: 16px !important;
+    color: #000;
+    margin-top: 10px;
+    line-height: 24px;
+  }
+}
