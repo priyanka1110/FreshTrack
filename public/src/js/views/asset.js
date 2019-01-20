@@ -44,6 +44,16 @@ define([
       asset.assetModel.clear().set(asset.assetModel.defaults);
     }
   });
+  exports.ErrorView = Marionette.View.extend({
+    initialize: function () {
+    },
+    render: function () {
+      this.el.innerHTML = compiledTemplates['templates/errorTpl.hbs']({ assetError: this.options.assetError });
+    },
+    onDestroy: function () {
+      header.headerModel.set({ closeButton: false });
+    }
+  });
   exports.AssestNotFound = Marionette.View.extend({
     initialize: function () {
       this.pointsRemaining = null;

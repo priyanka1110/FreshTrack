@@ -97,6 +97,7 @@ define([
           }, function (error) {
             // Error if error
             console.log(error);
+            app.FTMobile.AppRouter.navigate('errorPage/assets/', { trigger: true });
           });
         },
         function (error) {
