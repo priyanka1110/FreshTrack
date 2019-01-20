@@ -69,8 +69,10 @@ define([
       var enableCloseButton;
       if (headerModel.headerModel.get('currentPage') === 'profile') {
         enableCloseButton = true;
+        $('a').removeClass('no-icon');
       } else {
         enableCloseButton = false;
+        $('a').addClass('no-icon');
       }
       headerModel.headerModel.set({
         headerText: 'Profile',
