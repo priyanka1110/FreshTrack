@@ -83,7 +83,8 @@ define([
         device: device.uuid,
         type: 'ambrosus.asset.info',
         time: moment.utc().toISOString(),
-        name: this.model.get('title')
+        name: this.model.get('title'),
+        eventType: 'addAsset'
       };
       asset.assetModel.set(productDetails);
       return productDetails;

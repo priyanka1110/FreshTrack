@@ -100,9 +100,11 @@ define([
         senderOrg: this.options.event.get('senderOrg'),
         receiverName: this.options.event.get('receiverName'),
         receiverOrg: this.options.event.get('receiverOrg'),
+        addedBy: localStorage.getItem('userName'),
         device: device.uuid,
         type: 'ambrosus.asset.info',
-        time: moment.utc().toISOString()
+        time: moment.utc().toISOString(),
+        eventType: 'handover'
       };
       event.eventModel.set(eventDetails);
       return eventDetails;
@@ -118,8 +120,10 @@ define([
           ]
         }
       };
+      $('.preloader-wrapper').removeClass('hide');
       app.FTMobile.ambrosus.createEvent(this.model.get('assetId'), eventDetails).then(function (response) {
         // Response if successful
+        $('.preloader-wrapper').addClass('hide');
         app.FTMobile.AppRouter.navigate('success/', { trigger: true });
         console.log(response);
       }).catch(function (error) {

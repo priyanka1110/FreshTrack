@@ -17,11 +17,11 @@
 	<ul class="collection">
 		{{#each events}}
 		    <li class="collection-item avatar" id="{{eventId}}">
-		      	<i class="circle bg-indigo">{{points}}</i>
-		      	<span class="title">{{content.data.[0].senderName}}</span>
-		      	<p>{{content.data.[0].receiverName}}</p>
+		      	<i class="circle">{{content.data.[0].points}}</i>
+		      	<span class="title">{{formatEventType content.data.[0].eventType}}</span>
+		      	<p>{{content.data.[0].addedBy}}</p>
 		      	<span class="secondary-content">{{humanizeTime content.data.[0].time}}</span>
-		      	<span class="secondary-content content-2">{{content.data.[0].location}}</span>
+		      	<span class="secondary-content content-2"></span>
 		    </li>
 	    {{/each}}
   	</ul>

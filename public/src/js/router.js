@@ -152,7 +152,7 @@ define([
     },
     showAsset: function () {
       var events = event.eventCollection.toJSON();
-      var headerText = events[0] ? events[0].content.data[0].name : 'No transactions found';
+      var headerText = events[0] ? 'Transactions' : 'No transactions found';
       headerModel.headerModel.set({
         headerText: headerText,
         closeButton: true,
