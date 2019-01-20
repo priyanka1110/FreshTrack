@@ -22,7 +22,7 @@ define([
     return moment(isoString).format("MMM Do, YYYY");;
   });
   Handlebars.registerHelper('formatEventType', function (eventType) {
-    return eventType === 'addAsset' ? 'Asset' : 'Handover';
+    return eventType === 'addAsset' ? 'Asset created' : 'Handover';
   });
 
 });
