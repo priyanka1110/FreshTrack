@@ -80,27 +80,33 @@ define([
       var deffereds = [];
       cordova.plugins.barcodeScanner.scan(
         function (result) {
-          $('.preloader-wrapper').removeClass('hide');
-          deffereds.push(app.FTMobile.ambrosus.getEvents({ 'data[productId]': result.text }));
-          // remove the proxy if you can handle CORS
-          deffereds.push($.ajax({
-            url: 'https://api.upcitemdb.com/prod/trial/lookup?upc=' + result.text,
-            type: 'GET'
-          }));
-          $.when.apply($, deffereds).then(function (transPromise, assetResponse) {
-            transPromise.then(function (transResponse) {
-              self.getEventSuccessCallback(transResponse, assetResponse, result.text);
-            }).catch(function (error) {
+          if (result.cancelled) {
+            $('.preloader-wrapper').addClass('hide');
+          } else {
+            $('.preloader-wrapper').removeClass('hide');
+            deffereds.push(app.FTMobile.ambrosus.getEvents({ 'data[productId]': result.text }));
+            // remove the proxy if you can handle CORS
+            deffereds.push($.ajax({
+              url: 'https://api.upcitemdb.com/prod/trial/lookup?upc=' + result.text,
+              type: 'GET'
+            }));
+            $.when.apply($, deffereds).then(function (transPromise, assetResponse) {
+              transPromise.then(function (transResponse) {
+                self.getEventSuccessCallback(transResponse, assetResponse, result.text);
+              }).catch(function (error) {
+                // Error if error
+                console.log(error);
+              });
+            }, function (error) {
               // Error if error
               console.log(error);
+              $('.preloader-wrapper').addClass('hide');
+              app.FTMobile.AppRouter.navigate('errorPage/assets/', { trigger: true });
             });
-          }, function (error) {
-            // Error if error
-            console.log(error);
-            app.FTMobile.AppRouter.navigate('errorPage/assets/', { trigger: true });
-          });
+          }
         },
         function (error) {
+          $('.preloader-wrapper').addClass('hide');
           console.log('Error in bar code scanner ', error);
         }
       );
