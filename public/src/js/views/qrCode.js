@@ -120,7 +120,6 @@ define([
           ]
         }
       };
-      $('.preloader-wrapper').removeClass('hide');
       app.FTMobile.ambrosus.createEvent(this.model.get('assetId'), eventDetails).then(function (response) {
         // Response if successful
         $('.preloader-wrapper').addClass('hide');
@@ -129,6 +128,7 @@ define([
       }).catch(function (error) {
         // Error if error
         console.log(error);
+        $('.preloader-wrapper').addClass('hide');
       });
     },
     scanCode: function () {
@@ -141,10 +141,12 @@ define([
       cordova.plugins.barcodeScanner.scan(
         function (result) {
           // assetModel.assetModel.set({ productId: result.text });
+          $('.preloader-wrapper').removeClass('hide');
           secondPartyDetail = JSON.parse(result.text);
           if (!secondPartyDetail.userName ||
             !secondPartyDetail.organizationName ||
             !secondPartyDetail.deviceId) {
+            $('.preloader-wrapper').addClass('hide');
             app.FTMobile.AppRouter.navigate('errorPage/confirmationCode/', { trigger: true });
           }
           if (self.doneBy === 'shipper') {
