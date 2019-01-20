@@ -17,7 +17,7 @@
 	<ul class="collection">
 		{{#each events}}
 		    <li class="collection-item avatar" id="{{eventId}}">
-		      	<i class="circle">{{content.data.[0].points}}</i>
+		      	<div id='donut_{{@index}}'></div>
 		      	<span class="title">{{formatEventType content.data.[0].eventType}}</span>
 		      	<p>{{content.data.[0].addedBy}}</p>
 		      	<span class="secondary-content">{{humanizeTime content.data.[0].time}}</span>

@@ -5,8 +5,9 @@ define([
     'require',
     'exports',
     'marionette',
-    'backbone'
-  ], function (require, exports, Marionette, Backbone) {
+    'backbone',
+    'd3'
+  ], function (require, exports, Marionette, Backbone, d3) {
     'use strict';
   
     exports.donut = function (elId, percentage, color, backgroundColor, textColor, id) {
