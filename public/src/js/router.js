@@ -70,7 +70,7 @@ define([
       if (headerModel.headerModel.get('currentPage') === 'profile') {
         enableCloseButton = true;
       } else {
-        enableCloseButton = true;
+        enableCloseButton = false;
       }
       headerModel.headerModel.set({
         headerText: 'Profile',
