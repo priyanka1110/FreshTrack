@@ -24,5 +24,4 @@ define([
   Handlebars.registerHelper('formatEventType', function (eventType) {
     return eventType === 'addAsset' ? 'Asset created' : 'Handover';
   });
-
 });
