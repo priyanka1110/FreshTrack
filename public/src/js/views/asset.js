@@ -52,7 +52,15 @@ define([
     },
     onDestroy: function () {
       header.headerModel.set({ closeButton: false });
+    },
+    events: {
+      'click #redo': 'scanAgain'
+    },
+    scanAgain: function () {
+      // if (this.options.assetError) {
+      // }
     }
+
   });
   exports.AssestNotFound = Marionette.View.extend({
     initialize: function () {
