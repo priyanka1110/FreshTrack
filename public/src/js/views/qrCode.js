@@ -138,6 +138,11 @@ define([
         function (result) {
           // assetModel.assetModel.set({ productId: result.text });
           secondPartyDetail = JSON.parse(result.text);
+          if (!secondPartyDetail.userName ||
+            !secondPartyDetail.organizationName ||
+            !secondPartyDetail.deviceId) {
+            app.FTMobile.AppRouter.navigate('errorPage/confirmationCode/', { trigger: true });
+          }
           if (self.doneBy === 'shipper') {
             senderName = localStorage.getItem('userName');
             senderOrg = localStorage.getItem('orgName');

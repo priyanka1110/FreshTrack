@@ -53,7 +53,8 @@ define([
       'assets/': 'showAsset',
       'assetDetails/:id': 'showAssetDetails',
       'success/': 'successPage',
-      'users/': 'profile'
+      'users/': 'profile',
+      'errorPage/:currentPage/': 'showErrorPage'
     },
     homePage: function () {
       headerModel.headerModel.set({
@@ -78,6 +79,22 @@ define([
       });
       app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
       app.FTMobile.rootView.showChildView('bodyRegion', new userDetails.UserView());
+    },
+    showErrorPage: function (currentPage) {
+      var assetError = currentPage === 'assets';
+      var headerText;
+      if (assetError) {
+        headerText = 'Asset not found';
+      } else {
+        headerText = 'Wrong confirmation';
+      }
+      headerModel.headerModel.set({
+        headerText: headerText,
+        closeButton: true,
+        headerButtons: false
+      });
+      app.FTMobile.rootView.showChildView('headerRegion', new header.HeaderView({ model: headerModel.headerModel }));
+      app.FTMobile.rootView.showChildView('bodyRegion', new asset.ErrorView({ assetError: assetError }));
     },
     showAssetNotFound: function () {
       headerModel.headerModel.set({

@@ -28,7 +28,7 @@ define([
       document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
       document.addEventListener('resume', (function () {
         this.requestCamera();
-        app.checkIsLocationOn();
+        // app.checkIsLocationOn();
       }).bind(this), false);
     },
     onDeviceReady: function () {
