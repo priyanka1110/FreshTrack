@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* global define*/
 /* global openDatabase*/
-/* global Offline, cordova, Camera, StatusBar, AmbrosusAddress, AmbrosusSecret, AmbrosusSDK*/
+/* global Offline, M, cordova, Camera, StatusBar, AmbrosusAddress, AmbrosusSecret, AmbrosusSDK*/
 
 define([
   'exports',
@@ -34,7 +34,7 @@ define([
       if (!enabled) {
         elems = document.querySelectorAll('.modal');
         M.Modal.init(elems);
-        instance = materialize.Modal.getInstance(elems[0]);
+        instance = M.Modal.getInstance(elems[0]);
         instance.open();
       }
     });
@@ -57,7 +57,7 @@ define([
       thisModule.FTMobile.AppRouter.navigate('users/', { trigger: true });
     }
 
-    thisModule.checkIsLocationOn();
+    // thisModule.checkIsLocationOn();
 
   });
 });
