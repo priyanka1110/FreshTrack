@@ -2,7 +2,7 @@
 	<nav class="bg-navbar">
 	    <div class="nav-wrapper container">
 			<div id="logo-container" class="brand-logo left">
-			  <span class="a {{#if headerButtons}}header-width no-icon{{/if}}"> {{{headerText}}} </span>
+			  <span class="{{#if closeButton}}{{else}}header-width no-icon{{/if}}"> {{{headerText}}} </span>
 			  {{#if headerButtons}}
 				  <span class="nav-right-icon right">
 				  	<i class="icon-qrcode" id="showConfirmationCode"></i>
