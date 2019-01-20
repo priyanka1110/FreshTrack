@@ -22,7 +22,8 @@ requirejs.config({
     materialize: '../lib/js/materialize',
 
     // qr code generation
-    qrcode: '../lib/js/jquery.qrcode.min'
+    qrcode: '../lib/js/jquery.qrcode.min',
+    d3: '../lib/js/d3'
   },
   waitSeconds: 0
 });

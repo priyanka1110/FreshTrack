@@ -11,6 +11,7 @@ define([
   'js/app',
   'js/models/event',
   'js/models/header',
+  'js/applicationUtilities/charts',
   'templates/compiledTemplates'
 ], function (
   exports,
@@ -23,6 +24,7 @@ define([
   app,
   event,
   header,
+  charts,
   compiledTemplates
 ) {
   'use strict';
@@ -31,19 +33,26 @@ define([
     initialize: function () {
     },
     render: function () {
-      var events = event.eventCollection.toJSON();
       var productDetails;
-      if (events[0]) {
-        productDetails = _.last(events).content.data[0];
+      this.events = event.eventCollection.toJSON();
+      if (this.events[0]) {
+        productDetails = _.last(this.events).content.data[0];
         this.el.innerHTML = compiledTemplates['templates/transactions.hbs']({
           productDetails: productDetails,
-          events: events
+          events: this.events
         });
       } else {
         this.el.innerHTML = compiledTemplates['templates/noTransactions.hbs']();
       }
     },
     onAttach: function () {
+      this.renderDonuts();
+    },
+    renderDonuts: function () {
+      this.events.forEach(function (eventObj, index) {
+        charts.donut('donut_' + index, eventObj.content.data[0].points, '#00e676', '#ecf0f1', '#000');
+        charts.donutValue('donut_' + index, eventObj.content.data[0].points, '');
+      });
     },
     events: {
       'click .assetList': 'getAssetDetails',
