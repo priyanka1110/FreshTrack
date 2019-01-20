@@ -162,3 +162,33 @@ textarea.materialize-textarea.valid:focus, .select-wrapper.valid>input.select-dr
     -ms-transform: translate(-50%, -50%) !important;
     transform: translate(-50%, -50%) !important;
 }
+
+
+.product-details-page {
+  padding: 10px;
+
+  .collection {
+    margin: 0 -10px;
+    // border-top: 1px solid #ddd !important;  
+  }
+
+   .collection .collection-item.avatar {
+      min-height: 72px !important;
+   }
+
+   .collection .collection-item.avatar .title {
+      font-size: 18px;
+      font-weight: 500;
+      height: 30px;
+      color: #000 !important;
+   }
+
+   .collection .collection-item.avatar p {
+      font-size: 14px !important;
+      @extend %truncate;
+  }
+
+  .button-container {
+    margin-top: 30px;
+  }
+}
