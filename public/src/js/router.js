@@ -86,7 +86,7 @@ define([
       if (assetError) {
         headerText = 'Asset not found';
       } else {
-        headerText = 'Wrong confirmation';
+        headerText = 'Handover confirmation failed!';
       }
       headerModel.headerModel.set({
         headerText: headerText,

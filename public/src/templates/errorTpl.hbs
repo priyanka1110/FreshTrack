@@ -1,7 +1,7 @@
-<div id="{{productId}}" class='success-page assetList'> 
+<div id="{{productId}}" class='success-page onfirmation-code-message'> 
 	{{#if assetError}}
-		<p> Wrong barcode </p>
+		<h3> Wrong barcode </h3>
 	{{else}}
-		<p> Wrong confirmation code </p>
+		<h3> Did you scan the correct confirmation code? If yes, then your partner's confirmation code might be corrupted. Please ask them to restart the app and try again </h3>
 	{{/if}}
 </div>
