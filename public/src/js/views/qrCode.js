@@ -43,6 +43,14 @@ define([
         organizationName: localStorage.getItem('orgName')
       };
       var self = this;
+
+      // GeoLocation code
+      navigator.geolocation.getCurrentPosition(function (position) {
+        qrCodeData.location.latitude = position.coords.latitude;
+        qrCodeData.location.longitude = position.coords.longitude;
+        console.log(qrCodeData);
+      });
+
       // this.getLocationData(function (position) {
       //   qrCodeData.location.latitude = position.coords.latitude;
       //   qrCodeData.location.longitude = position.coords.longitude;
@@ -72,7 +80,7 @@ define([
     },
     getLocationData: function (successCallback) {
       this.checkLocationServiceStatus(function () {
-        // navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        // navigator.geolocation.getCurrentPosition(successCallback);
         successCallback();
       });
     },
@@ -140,39 +148,35 @@ define([
       var self = this;
       cordova.plugins.barcodeScanner.scan(
         function (result) {
-          if (result.cancelled) {
+          // assetModel.assetModel.set({ productId: result.text });
+          $('.preloader-wrapper').removeClass('hide');
+          secondPartyDetail = JSON.parse(result.text);
+          if (!secondPartyDetail.userName ||
+            !secondPartyDetail.organizationName ||
+            !secondPartyDetail.deviceId) {
             $('.preloader-wrapper').addClass('hide');
-          } else {
-            // assetModel.assetModel.set({ productId: result.text });
-            $('.preloader-wrapper').removeClass('hide');
-            secondPartyDetail = JSON.parse(result.text);
-            if (!secondPartyDetail.userName ||
-              !secondPartyDetail.organizationName ||
-              !secondPartyDetail.deviceId) {
-              $('.preloader-wrapper').addClass('hide');
-              app.FTMobile.AppRouter.navigate('errorPage/confirmationCode/', { trigger: true });
-            }
-            if (self.doneBy === 'shipper') {
-              senderName = localStorage.getItem('userName');
-              senderOrg = localStorage.getItem('orgName');
-              receiverName = secondPartyDetail.userName;
-              receiverOrg = secondPartyDetail.organizationName;
-            } else {
-              senderName = secondPartyDetail.userName;
-              senderOrg = secondPartyDetail.organizationName;
-              receiverName = localStorage.getItem('userName');
-              receiverOrg = localStorage.getItem('orgName');
-            }
-            event.eventModel.set({
-              senderName: senderName,
-              senderOrg: senderOrg,
-              receiverName: receiverName,
-              receiverOrg: receiverOrg
-            });
-            console.log(result.text);
-            header.headerModel.set({ currentPage: 'handover' });
-            self.addEvent();
+            app.FTMobile.AppRouter.navigate('errorPage/confirmationCode/', { trigger: true });
           }
+          if (self.doneBy === 'shipper') {
+            senderName = localStorage.getItem('userName');
+            senderOrg = localStorage.getItem('orgName');
+            receiverName = secondPartyDetail.userName;
+            receiverOrg = secondPartyDetail.organizationName;
+          } else {
+            senderName = secondPartyDetail.userName;
+            senderOrg = secondPartyDetail.organizationName;
+            receiverName = localStorage.getItem('userName');
+            receiverOrg = localStorage.getItem('orgName');
+          }
+          event.eventModel.set({
+            senderName: senderName,
+            senderOrg: senderOrg,
+            receiverName: receiverName,
+            receiverOrg: receiverOrg
+          });
+          console.log(result.text);
+          header.headerModel.set({ currentPage: 'handover' });
+          self.addEvent();
         },
         function (error) {
           console.log('Error in bar code scanner ', error);
