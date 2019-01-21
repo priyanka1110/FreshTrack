@@ -45,21 +45,31 @@ define([
       var self = this;
 
       // GeoLocation code
-      navigator.geolocation.getCurrentPosition(function (position) {
+      this.getLocationData(function (position) {
+        console.log(position);
         qrCodeData.location.latitude = position.coords.latitude;
         qrCodeData.location.longitude = position.coords.longitude;
-        console.log(qrCodeData);
+
+        qrCodeData.confirmtationCodeGeneratedAt = moment().format();
+        $(self.el).find('#confirmationCode').html('');
+
+        $(self.el).find('#confirmationCode').qrcode({
+          text: JSON.stringify(qrCodeData)
+        });
+        console.log('Created');
       });
+
+      console.log(qrCodeData);
 
       // this.getLocationData(function (position) {
       //   qrCodeData.location.latitude = position.coords.latitude;
       //   qrCodeData.location.longitude = position.coords.longitude;
-      qrCodeData.confirmtationCodeGeneratedAt = moment().format();
-      $(self.el).find('#confirmationCode').html('');
+      // qrCodeData.confirmtationCodeGeneratedAt = moment().format();
+      // $(self.el).find('#confirmationCode').html('');
 
-      $(self.el).find('#confirmationCode').qrcode({
-        text: JSON.stringify(qrCodeData)
-      });
+      // $(self.el).find('#confirmationCode').qrcode({
+      //   text: JSON.stringify(qrCodeData)
+      // });
       // }, function (error) {
       //   console.log(error);
       // });
@@ -80,8 +90,20 @@ define([
     },
     getLocationData: function (successCallback) {
       this.checkLocationServiceStatus(function () {
-        // navigator.geolocation.getCurrentPosition(successCallback);
-        successCallback();
+        navigator.geolocation.getCurrentPosition(function (position) {
+          console.log('Generated');
+          successCallback(position);
+        },
+        function (error) {
+          var position = {
+            coords: {
+              latitude: null,
+              longitude: null
+            }
+          };
+          console.log(error);
+          successCallback(position);
+        });
       });
     },
     onDestroy: function () {
