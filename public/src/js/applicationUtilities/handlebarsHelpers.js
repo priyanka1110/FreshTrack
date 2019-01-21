@@ -19,7 +19,7 @@ define([
   'use strict';
 
   Handlebars.registerHelper('humanizeTime', function (isoString) {
-    return moment(isoString).format("MMM Do, YYYY");;
+    return moment(isoString).format("MMM Do, YYYY");
   });
   Handlebars.registerHelper('formatEventType', function (eventType) {
     return eventType === 'addAsset' ? 'Asset created' : 'Handover';
