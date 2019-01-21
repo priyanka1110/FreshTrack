@@ -188,7 +188,16 @@ textarea.materialize-textarea.valid:focus, .select-wrapper.valid>input.select-dr
       @extend %truncate;
   }
 
+  .collection .collection-item.avatar .secondary-content {
+    top: 10px !important;
+    color: blue !important;
+  }
+
   .button-container {
     margin-top: 30px;
   }
+}
+
+.truncate {
+  width: 90%;
 }
