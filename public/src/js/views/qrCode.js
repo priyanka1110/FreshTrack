@@ -45,19 +45,19 @@ define([
       var self = this;
 
       // GeoLocation code
-      this.getLocationData(function (position) {
-        console.log(position);
-        qrCodeData.location.latitude = position.coords.latitude;
-        qrCodeData.location.longitude = position.coords.longitude;
+      // this.getLocationData(function (position) {
+      //   console.log(position);
+      //   qrCodeData.location.latitude = position.coords.latitude;
+      //   qrCodeData.location.longitude = position.coords.longitude;
 
-        qrCodeData.confirmtationCodeGeneratedAt = moment().format();
-        $(self.el).find('#confirmationCode').html('');
+      qrCodeData.confirmtationCodeGeneratedAt = moment().format();
+      $(self.el).find('#confirmationCode').html('');
 
-        $(self.el).find('#confirmationCode').qrcode({
-          text: JSON.stringify(qrCodeData)
-        });
-        console.log('Created');
+      $(self.el).find('#confirmationCode').qrcode({
+        text: JSON.stringify(qrCodeData)
       });
+      console.log('Created');
+      // });
 
       console.log(qrCodeData);
 
@@ -170,35 +170,39 @@ define([
       var self = this;
       cordova.plugins.barcodeScanner.scan(
         function (result) {
-          // assetModel.assetModel.set({ productId: result.text });
-          $('.preloader-wrapper').removeClass('hide');
-          secondPartyDetail = JSON.parse(result.text);
-          if (!secondPartyDetail.userName ||
-            !secondPartyDetail.organizationName ||
-            !secondPartyDetail.deviceId) {
+          if (result.cancelled) {
             $('.preloader-wrapper').addClass('hide');
-            app.FTMobile.AppRouter.navigate('errorPage/confirmationCode/', { trigger: true });
-          }
-          if (self.doneBy === 'shipper') {
-            senderName = localStorage.getItem('userName');
-            senderOrg = localStorage.getItem('orgName');
-            receiverName = secondPartyDetail.userName;
-            receiverOrg = secondPartyDetail.organizationName;
           } else {
-            senderName = secondPartyDetail.userName;
-            senderOrg = secondPartyDetail.organizationName;
-            receiverName = localStorage.getItem('userName');
-            receiverOrg = localStorage.getItem('orgName');
+            // assetModel.assetModel.set({ productId: result.text });
+            $('.preloader-wrapper').removeClass('hide');
+            secondPartyDetail = JSON.parse(result.text);
+            if (!secondPartyDetail.userName ||
+              !secondPartyDetail.organizationName ||
+              !secondPartyDetail.deviceId) {
+              $('.preloader-wrapper').addClass('hide');
+              app.FTMobile.AppRouter.navigate('errorPage/confirmationCode/', { trigger: true });
+            }
+            if (self.doneBy === 'shipper') {
+              senderName = localStorage.getItem('userName');
+              senderOrg = localStorage.getItem('orgName');
+              receiverName = secondPartyDetail.userName;
+              receiverOrg = secondPartyDetail.organizationName;
+            } else {
+              senderName = secondPartyDetail.userName;
+              senderOrg = secondPartyDetail.organizationName;
+              receiverName = localStorage.getItem('userName');
+              receiverOrg = localStorage.getItem('orgName');
+            }
+            event.eventModel.set({
+              senderName: senderName,
+              senderOrg: senderOrg,
+              receiverName: receiverName,
+              receiverOrg: receiverOrg
+            });
+            console.log(result.text);
+            header.headerModel.set({ currentPage: 'handover' });
+            self.addEvent();
           }
-          event.eventModel.set({
-            senderName: senderName,
-            senderOrg: senderOrg,
-            receiverName: receiverName,
-            receiverOrg: receiverOrg
-          });
-          console.log(result.text);
-          header.headerModel.set({ currentPage: 'handover' });
-          self.addEvent();
         },
         function (error) {
           console.log('Error in bar code scanner ', error);
